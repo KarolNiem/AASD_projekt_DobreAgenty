@@ -20,11 +20,11 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
                 System.out.println("CustomerSystemInterface received: " + msg.getContent());
                 String senderName = msg.getSender().getName();
                 switch (senderName) {
-                    case "Customer" -> HandleCustomerMessage(msg);
-                    case "CostEvaluator" -> HandleCostEvaluatorReply(msg);
-                    case "AgeStructEvaluator" -> HandleAgeStructEvaluatorReply(msg);
-                    case "UsabilityEvaluator" -> HandleUsabilityEvaluatorReply(msg);
-                    case "BudgetChecker" -> HandleBudgetCheckerReply(msg);
+                    case "Customer" -> handleCustomerMessage(msg);
+                    case "CostEvaluator" -> handleCostEvaluatorReply(msg);
+                    case "AgeStructEvaluator" -> handleAgeStructEvaluatorReply(msg);
+                    case "UsabilityEvaluator" -> handleUsabilityEvaluatorReply(msg);
+                    case "BudgetChecker" -> handleBudgetCheckerReply(msg);
                 }
             } else {
                 block();
@@ -34,7 +34,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         }
     }
 
-    public void HandleCustomerMessage(ACLMessage msg) {
+    public void handleCustomerMessage(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
 
@@ -52,70 +52,69 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         myAgent.send(newMsg);
     }
 
-    public void HandleCostEvaluatorReply(ACLMessage msg) {
+    public void handleCostEvaluatorReply(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         CostEvaluation evaluation = new CostEvaluation(json);
-        EvaluationSummary summary = FindSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
         if (summary != null) {
             summary.costEvaluation = evaluation;
-            if (summary.IsCompleted()) {
-                SendEvaluationToCustomerHandler(summary);
+            if (summary.isCompleted()) {
+                sendEvaluationToCustomerHandler(summary);
             }
         }
     }
 
-    private void HandleAgeStructEvaluatorReply(ACLMessage msg) {
+    private void handleAgeStructEvaluatorReply(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         AgeStructEvaluation evaluation = new AgeStructEvaluation(json);
-        EvaluationSummary summary = FindSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
         if (summary != null) {
             summary.ageStructEvaluation = evaluation;
-            if (summary.IsCompleted()) {
-                SendEvaluationToCustomerHandler(summary);
+            if (summary.isCompleted()) {
+                sendEvaluationToCustomerHandler(summary);
             }
         }
     }
 
-    private void HandleUsabilityEvaluatorReply(ACLMessage msg) {
+    private void handleUsabilityEvaluatorReply(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         UsabilityEvaluation evaluation = new UsabilityEvaluation(json);
-        EvaluationSummary summary = FindSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
         if (summary != null) {
             summary.usabilityEvaluation = evaluation;
-            if (summary.IsCompleted()) {
-                SendEvaluationToCustomerHandler(summary);
+            if (summary.isCompleted()) {
+                sendEvaluationToCustomerHandler(summary);
             }
         }
     }
 
-    private void HandleBudgetCheckerReply(ACLMessage msg) {
+    private void handleBudgetCheckerReply(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         BudgetEvaluation evaluation = new BudgetEvaluation(json);
-        EvaluationSummary summary = FindSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
         if (summary != null) {
             summary.budgetEvaluation = evaluation;
-            if (summary.IsCompleted()) {
-                SendEvaluationToCustomerHandler(summary);
+            if (summary.isCompleted()) {
+                sendEvaluationToCustomerHandler(summary);
             }
         }
     }
 
-    private void SendEvaluationToCustomerHandler(EvaluationSummary summary) {
+    private void sendEvaluationToCustomerHandler(EvaluationSummary summary) {
         offers.removeIf(o -> o.id == summary.offerID);
         summaries.remove(summary);
 
-        Evaluation globalEvaluation = new Evaluation();
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
-        msg.setContent(globalEvaluation.toString());
+        msg.addReceiver(new AID("GlobalEvaluator", AID.ISLOCALNAME));
+        msg.setContent(summary.toString());
         myAgent.send(msg);
     }
 
-    private EvaluationSummary FindSummaryWithID(UUID id) {
+    private EvaluationSummary findSummaryWithID(UUID id) {
         return summaries.stream()
                 .filter((s) -> s.offerID == id)
                 .findFirst()

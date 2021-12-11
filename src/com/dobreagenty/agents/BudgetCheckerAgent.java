@@ -1,11 +1,11 @@
 package com.dobreagenty.agents;
 
-import com.dobreagenty.behaviours.CheckBudget;
+import com.dobreagenty.behaviours.BudgetCheckerBehaviour;
 import jade.core.Agent;
 
 public class BudgetCheckerAgent extends Agent {
     protected void setup() {
-        addBehaviour(new CheckBudget());
+        addBehaviour(new BudgetCheckerBehaviour());
         System.out.println("BudgetChecker created.");
     }
 }

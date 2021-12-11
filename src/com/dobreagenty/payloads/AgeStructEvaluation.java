@@ -4,15 +4,13 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class AgeStructEvaluation {
-    public UUID offerID;
-
+public class AgeStructEvaluation extends BaseEvaluation {
     public AgeStructEvaluation(Offer offer) {
-        offerID = offer.id;
+        super(offer);
     }
 
     public AgeStructEvaluation(JSONObject json) {
-        offerID = UUID.fromString(json.getString("offerID"));
+        super(json);
     }
 
     @Override

@@ -4,16 +4,15 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class BudgetEvaluation {
-    public UUID offerID;
+public class BudgetEvaluation extends BaseEvaluation {
     public boolean withinBudget;
 
     public BudgetEvaluation(Offer offer) {
-        offerID = offer.id;
+        super(offer);
     }
 
     public BudgetEvaluation(JSONObject json) {
-        offerID = UUID.fromString(json.getString("offerID"));
+        super(json);
         withinBudget = json.getBoolean("withinBudget");
     }
 

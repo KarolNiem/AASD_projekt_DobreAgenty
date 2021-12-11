@@ -2,11 +2,10 @@ package com.dobreagenty.behaviours;
 
 import com.dobreagenty.payloads.Offer;
 import com.dobreagenty.payloads.UsabilityEvaluation;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import org.json.JSONObject;
 
-public class EvaluateUsability extends CyclicBehaviour {
+public class UsabilityEvaluatorBehaviour extends EvaluatorBehaviour {
 
     @Override
     public void action() {

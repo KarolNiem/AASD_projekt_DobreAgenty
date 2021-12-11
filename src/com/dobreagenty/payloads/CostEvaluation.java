@@ -4,17 +4,15 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class CostEvaluation {
-    public UUID offerID;
+public class CostEvaluation extends BaseEvaluation {
     public int cost;
 
     public CostEvaluation(Offer offer) {
-        offerID = offer.id;
-        cost = 1000;
+        super(offer);
     }
 
     public CostEvaluation(JSONObject json) {
-        offerID = UUID.fromString(json.getString("offerID"));
+        super(json);
         cost = json.getInt("cost");
     }
 

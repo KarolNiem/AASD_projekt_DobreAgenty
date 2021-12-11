@@ -4,15 +4,13 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public class UsabilityEvaluation {
-    public UUID offerID;
-
+public class UsabilityEvaluation extends BaseEvaluation{
     public UsabilityEvaluation(Offer offer) {
-        offerID = offer.id;
+        super(offer);
     }
 
     public UsabilityEvaluation(JSONObject json) {
-        offerID = UUID.fromString(json.getString("offerID"));
+        super(json);
     }
 
     @Override

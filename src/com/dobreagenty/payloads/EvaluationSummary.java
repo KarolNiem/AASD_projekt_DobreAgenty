@@ -1,5 +1,6 @@
 package com.dobreagenty.payloads;
 
+import org.json.JSONObject;
 import java.util.UUID;
 
 public class EvaluationSummary {
@@ -13,8 +14,17 @@ public class EvaluationSummary {
         this.offerID = offer.id;
     }
 
-    public boolean IsCompleted() {
+    public EvaluationSummary(JSONObject json) {
+        // CHANGE
+    }
+
+    public boolean isCompleted() {
         return costEvaluation != null && ageStructEvaluation != null &&
                 usabilityEvaluation != null && budgetEvaluation != null;
+    }
+
+    @Override
+    public String toString() {
+        return ""; // CHANGE
     }
 }
