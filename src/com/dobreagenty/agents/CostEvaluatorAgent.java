@@ -6,5 +6,6 @@ import jade.core.Agent;
 public class CostEvaluatorAgent extends Agent {
     protected void setup() {
         addBehaviour(new EvaluateCost());
+        System.out.println("CostEvaluator created.");
     }
 }

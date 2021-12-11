@@ -14,6 +14,7 @@ public class EvaluateCost extends CyclicBehaviour {
         if (msg != null) {
             try {
                 String content = msg.getContent();
+                System.out.println("CostEvaluator received: " + content);
                 JSONObject json = new JSONObject(content);
                 Offer offer = new Offer(json);
                 CostEvaluation evaluation = new CostEvaluation(offer);

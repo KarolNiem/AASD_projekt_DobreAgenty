@@ -6,5 +6,6 @@ import jade.core.Agent;
 public class UsabilityEvaluatorAgent extends Agent {
     protected void setup() {
         addBehaviour(new EvaluateUsability());
+        System.out.println("UsabilityEvaluator created.");
     }
 }

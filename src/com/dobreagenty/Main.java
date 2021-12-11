@@ -21,11 +21,14 @@ public class Main {
                     "com.dobreagenty.agents.AgeStructEvaluatorAgent", null);
             AgentController budgetChecker = container.createNewAgent("BudgetChecker",
                     "com.dobreagenty.agents.BudgetCheckerAgent", null);
+            AgentController customerSystemInterface = container.createNewAgent("CustomerSystemInterface",
+                    "com.dobreagenty.agents.CustomerSystemInterfaceAgent", null);
 
             costEvaluator.start();
             usabilityEvaluator.start();
             ageStructEvaluator.start();
             budgetChecker.start();
+            customerSystemInterface.start();
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }

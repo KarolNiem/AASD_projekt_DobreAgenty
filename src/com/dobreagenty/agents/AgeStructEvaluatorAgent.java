@@ -6,5 +6,6 @@ import jade.core.Agent;
 public class AgeStructEvaluatorAgent extends Agent {
     protected void setup() {
         addBehaviour(new EvaluateAgeStruct());
+        System.out.println("AgeStructEvaluator created.");
     }
 }

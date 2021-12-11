@@ -13,6 +13,10 @@ public class CostEvaluation {
         cost = 1000;
     }
 
+    public CostEvaluation(JSONObject json) {
+        cost = json.getInt("cost");
+    }
+
     @Override
     public String toString() {
         JSONObject json = new JSONObject();
