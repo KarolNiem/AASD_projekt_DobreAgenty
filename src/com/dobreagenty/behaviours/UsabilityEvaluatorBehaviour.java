@@ -16,10 +16,7 @@ public class UsabilityEvaluatorBehaviour extends EvaluatorBehaviour {
                 JSONObject json = new JSONObject(content);
                 Offer offer = new Offer(json);
                 UsabilityEvaluation evaluation = new UsabilityEvaluation(offer);
-                ACLMessage reply = msg.createReply();
-                reply.setPerformative(ACLMessage.INFORM);
-                reply.setContent(evaluation.toString());
-                myAgent.send(reply);
+                reply(msg, evaluation);
             } catch (Exception e) {
                 e.printStackTrace();
             }
