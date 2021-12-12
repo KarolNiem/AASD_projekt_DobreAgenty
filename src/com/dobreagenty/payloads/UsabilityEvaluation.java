@@ -2,8 +2,6 @@ package com.dobreagenty.payloads;
 
 import org.json.JSONObject;
 
-import java.util.UUID;
-
 public class UsabilityEvaluation extends BaseEvaluation{
     public UsabilityEvaluation(Offer offer) {
         super(offer);

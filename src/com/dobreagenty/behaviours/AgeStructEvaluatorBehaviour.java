@@ -1,9 +1,7 @@
 package com.dobreagenty.behaviours;
 
 import com.dobreagenty.payloads.AgeStructEvaluation;
-import com.dobreagenty.payloads.BaseEvaluation;
 import com.dobreagenty.payloads.Offer;
-import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import org.json.JSONObject;
 

@@ -20,7 +20,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
                 System.out.println("CustomerSystemInterface received: " + msg.getContent());
                 String senderName = msg.getSender().getName();
                 switch (senderName) {
-                    case "Customer" -> handleCustomerMessage(msg);
+                    case "CustomerHandler" -> handleCustomerHandlerMessage(msg);
                     case "CostEvaluator" -> handleCostEvaluatorReply(msg);
                     case "AgeStructEvaluator" -> handleAgeStructEvaluatorReply(msg);
                     case "UsabilityEvaluator" -> handleUsabilityEvaluatorReply(msg);
@@ -34,7 +34,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         }
     }
 
-    public void handleCustomerMessage(ACLMessage msg) {
+    public void handleCustomerHandlerMessage(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
 
@@ -60,7 +60,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         if (summary != null) {
             summary.costEvaluation = evaluation;
             if (summary.isCompleted()) {
-                sendEvaluationToCustomerHandler(summary);
+                sendSummaryToGlobalEvaluator(summary);
             }
         }
     }
@@ -73,7 +73,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         if (summary != null) {
             summary.ageStructEvaluation = evaluation;
             if (summary.isCompleted()) {
-                sendEvaluationToCustomerHandler(summary);
+                sendSummaryToGlobalEvaluator(summary);
             }
         }
     }
@@ -86,7 +86,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         if (summary != null) {
             summary.usabilityEvaluation = evaluation;
             if (summary.isCompleted()) {
-                sendEvaluationToCustomerHandler(summary);
+                sendSummaryToGlobalEvaluator(summary);
             }
         }
     }
@@ -99,12 +99,12 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         if (summary != null) {
             summary.budgetEvaluation = evaluation;
             if (summary.isCompleted()) {
-                sendEvaluationToCustomerHandler(summary);
+                sendSummaryToGlobalEvaluator(summary);
             }
         }
     }
 
-    private void sendEvaluationToCustomerHandler(EvaluationSummary summary) {
+    private void sendSummaryToGlobalEvaluator(EvaluationSummary summary) {
         offers.removeIf(o -> o.id == summary.offerID);
         summaries.remove(summary);
 

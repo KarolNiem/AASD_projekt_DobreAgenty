@@ -2,8 +2,6 @@ package com.dobreagenty.payloads;
 
 import org.json.JSONObject;
 
-import java.util.UUID;
-
 public class AgeStructEvaluation extends BaseEvaluation {
     public AgeStructEvaluation(Offer offer) {
         super(offer);
