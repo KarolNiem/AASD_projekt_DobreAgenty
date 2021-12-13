@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AASD.iml" filepath="$PROJECT_DIR$/AASD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aasd_javafx_demo.iml" filepath="$PROJECT_DIR$/aasd_javafx_demo.iml" />
     </modules>
   </component>
 </project>
