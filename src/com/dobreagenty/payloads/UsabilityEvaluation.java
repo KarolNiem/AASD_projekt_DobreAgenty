@@ -1,5 +1,6 @@
 package com.dobreagenty.payloads;
 
+import com.dobreagenty.misc.*;
 import org.json.JSONObject;
 
 public class UsabilityEvaluation extends BaseEvaluation{
@@ -14,9 +15,25 @@ public class UsabilityEvaluation extends BaseEvaluation{
         result = json.getDouble("result");
     }
 
-    //TODO: implement usability evaluation
     public void evaluate() {
-        result = 1.0;
+        double averageCoeff = getAveragePlacesPerPerson();
+        double pop = offer.getNumberOfTargetPopulation();
+        double places = offer.district.getNumberOfPlaces(offer.district.districtEnum, offer.type.type);
+        double coeff = places / pop;
+        // Value between 0 and 1, 0.5 if average, 0.0 if twice as many as average
+        result = Math.min(1, Math.max(0, 1 - 0.5 * coeff / averageCoeff));
+    }
+
+    public double getAveragePlacesPerPerson() {
+        District averageDistrict = new District(DistrictEnum.Average);
+        TargetGroup targetGroup = offer.type.targetGroup;
+        double averagePop = switch (targetGroup) {
+            case Children -> averageDistrict.numberOfChildren;
+            case Adults -> averageDistrict.numberOfAdults;
+            case Seniors -> averageDistrict.numberOfSeniors;
+        };
+        double averagePlaces = averageDistrict.getNumberOfPlaces(DistrictEnum.Average, offer.type.type);
+        return averagePlaces / averagePop;
     }
 
     @Override

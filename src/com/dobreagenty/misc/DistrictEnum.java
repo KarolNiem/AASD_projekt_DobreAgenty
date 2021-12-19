@@ -5,7 +5,8 @@ public enum DistrictEnum {
     Mokotow,
     Wola,
     Zoliborz,
-    PragaPln;
+    PragaPln,
+    Average;
 
     @Override
     public String toString() {
@@ -15,6 +16,7 @@ public enum DistrictEnum {
             case Wola -> "Wola";
             case Zoliborz -> "Żoliborz";
             case PragaPln -> "Praga Północ";
+            case Average -> "";
         };
     }
 }

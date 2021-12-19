@@ -33,6 +33,19 @@ public class District {
         libraries = getNumberOfLibraries(districtEnum);
     }
 
+    public int getNumberOfPlaces(DistrictEnum district, OfferTypeEnum type) {
+        return switch (type) {
+            case School -> getNumberOfSchools(district);
+            case Playground -> getNumberOfPlaygrounds(district);
+            case Preschool -> getNumberOfPreschools(district);
+            case BrineGraduationTower -> getNumberOfBrineGraduationTowers(district);
+            case ParkingLot -> getNumberOfParkingLots(district);
+            case BusStop -> getNumberOfBusStops(district);
+            case TrashCan -> getNumberOfTrashCans(district);
+            case Library -> getNumberOfLibraries(district);
+        };
+    }
+
     public int getBudget(DistrictEnum district) {
         return switch (district) {
             case Srodmiescie -> 19000000;
@@ -40,6 +53,7 @@ public class District {
             case Wola -> 40000000;
             case Zoliborz -> 15000000;
             case PragaPln -> 15000000;
+            case Average -> 24400000;
         };
     }
 
@@ -50,6 +64,7 @@ public class District {
             case Wola -> 20298;
             case Zoliborz -> 8177;
             case PragaPln -> 8484;
+            case Average -> 16257;
         };
     }
 
@@ -60,6 +75,7 @@ public class District {
             case Wola -> 90709;
             case Zoliborz -> 32837;
             case PragaPln -> 42243;
+            case Average -> 74223;
         };
     }
 
@@ -70,6 +86,7 @@ public class District {
             case Wola -> 30400;
             case Zoliborz -> 11778;
             case PragaPln -> 12754;
+            case Average -> 27450;
         };
     }
 
@@ -80,6 +97,7 @@ public class District {
             case Wola -> 19;
             case Zoliborz -> 19;
             case PragaPln -> 15;
+            case Average -> 18;
         };
     }
 
@@ -90,6 +108,7 @@ public class District {
             case Wola -> 22;
             case Zoliborz -> 6;
             case PragaPln -> 8;
+            case Average -> 20;
         };
     }
 
@@ -100,13 +119,14 @@ public class District {
             case Wola -> 66;
             case Zoliborz -> 28;
             case PragaPln -> 19;
+            case Average -> 55;
         };
     }
 
     public int getNumberOfBrineGraduationTowers(DistrictEnum district) {
         return switch (district) {
             case Srodmiescie, Mokotow, Zoliborz -> 0;
-            case Wola, PragaPln -> 1;
+            case Wola, PragaPln, Average -> 1;
         };
     }
 
@@ -117,6 +137,7 @@ public class District {
             case Wola -> 20;
             case Zoliborz -> 18;
             case PragaPln -> 18;
+            case Average -> 20;
         };
     }
 
@@ -127,6 +148,7 @@ public class District {
             case Wola -> 249;
             case Zoliborz -> 176;
             case PragaPln -> 153;
+            case Average -> 185;
         };
     }
 
@@ -137,6 +159,7 @@ public class District {
             case Wola -> 827;
             case Zoliborz -> 386;
             case PragaPln -> 680;
+            case Average -> 1053;
         };
     }
 
@@ -147,6 +170,7 @@ public class District {
             case Wola -> 9;
             case Zoliborz -> 9;
             case PragaPln -> 8;
+            case Average -> 11;
         };
     }
 }
