@@ -4,13 +4,17 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 public abstract class BaseEvaluation {
-    public UUID offerID;
+    public Offer offer;
 
     public BaseEvaluation(Offer offer) {
-        offerID = offer.id;
+        this.offer = offer;
+        evaluate();
     }
 
     public BaseEvaluation(JSONObject json) {
-        offerID = UUID.fromString(json.getString("offerID"));
+        offer = new Offer(json);
+        evaluate();
     }
+
+    public abstract void evaluate();
 }

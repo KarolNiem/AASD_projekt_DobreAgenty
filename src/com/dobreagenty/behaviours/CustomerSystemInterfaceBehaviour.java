@@ -56,9 +56,9 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         CostEvaluation evaluation = new CostEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
-            summary.costEvaluation = evaluation;
+            summary.costEvaluation = evaluation.result;
             if (summary.isCompleted()) {
                 sendSummaryToGlobalEvaluator(summary);
             }
@@ -69,9 +69,9 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         AgeStructEvaluation evaluation = new AgeStructEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
-            summary.ageStructEvaluation = evaluation;
+            summary.ageStructEvaluation = evaluation.result;
             if (summary.isCompleted()) {
                 sendSummaryToGlobalEvaluator(summary);
             }
@@ -82,9 +82,9 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         UsabilityEvaluation evaluation = new UsabilityEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
-            summary.usabilityEvaluation = evaluation;
+            summary.usabilityEvaluation = evaluation.result;
             if (summary.isCompleted()) {
                 sendSummaryToGlobalEvaluator(summary);
             }
@@ -95,9 +95,9 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         BudgetEvaluation evaluation = new BudgetEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offerID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
-            summary.budgetEvaluation = evaluation;
+            summary.budgetEvaluation = evaluation.result;
             if (summary.isCompleted()) {
                 sendSummaryToGlobalEvaluator(summary);
             }
@@ -105,7 +105,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
     }
 
     private void sendSummaryToGlobalEvaluator(EvaluationSummary summary) {
-        offers.removeIf(o -> o.id == summary.offerID);
+        offers.removeIf(o -> o.id == summary.offer.id);
         summaries.remove(summary);
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
@@ -116,7 +116,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
 
     private EvaluationSummary findSummaryWithID(UUID id) {
         return summaries.stream()
-                .filter((s) -> s.offerID == id)
+                .filter((s) -> s.offer.id == id)
                 .findFirst()
                 .orElse(null);
     }
