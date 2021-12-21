@@ -1,5 +1,7 @@
 package com.dobreagenty.payloads;
 
+import org.json.JSONObject;
+
 public class CustomerDetails {
     public String personName;
     public String surname;
@@ -14,7 +16,7 @@ public class CustomerDetails {
     }
 
     public CustomerDetails(JSONObject json) {
-        personName = json.getString("personName");
+        personName = json.getString("name");
         surname = json.getString("surname");
         email = json.getString("email");
         phoneNumber = json.getString("phoneNumber");
@@ -23,7 +25,7 @@ public class CustomerDetails {
     @Override
     public String toString() {
         JSONObject json = new JSONObject();
-        json.put("personName", personName);
+        json.put("name", personName);
         json.put("surname", surname);
         json.put("email", email);
         json.put("phoneNumber", phoneNumber);

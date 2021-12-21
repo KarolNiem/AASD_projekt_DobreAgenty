@@ -2,6 +2,8 @@ package com.dobreagenty.payloads;
 
 import com.dobreagenty.misc.DistrictEnum;
 import com.dobreagenty.misc.OfferType;
+import com.dobreagenty.misc.OfferTypeEnum;
+import org.json.JSONObject;
 
 public class Idea {
     public String name;
@@ -16,7 +18,7 @@ public class Idea {
 
     public Idea(JSONObject json) {
         name = json.getString("name");
-        offerType = OfferTypeEnum.values()[json.getInt("type")];
+        offerType = OfferTypeEnum.values()[json.getInt("offerType")];
         district = DistrictEnum.values()[json.getInt("district")];
     }
 
@@ -24,7 +26,7 @@ public class Idea {
     public String toString() {
         JSONObject json = new JSONObject();
         json.put("name", name);
-        json.put("type", offerType);
+        json.put("offerType", offerType);
         json.put("district", district);
         return json.toString();
     }
