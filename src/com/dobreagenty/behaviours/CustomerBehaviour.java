@@ -1,67 +1,72 @@
 package com.dobreagenty.behaviours;
 
+import com.dobreagenty.misc.DistrictEnum;
+import com.dobreagenty.misc.OfferType;
+import com.dobreagenty.misc.OfferTypeEnum;
+import com.dobreagenty.payloads.*;
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.SimpleBehaviour;
+import jade.domain.persistence.DeleteAgent;
+import jade.lang.acl.ACLMessage;
+import org.json.JSONObject;
+import jade.core.Agent;
 
-public class CustomerBehaviour extends CyclicBehaviour {
-    @Override
-    public void action() {
-            public ArrayList<Idea> ideas = new ArrayList<>();
+import java.util.ArrayList;
+
+public class CustomerBehaviour extends OneShotBehaviour {
+    public ArrayList<Idea> ideas = new ArrayList<>();
     public ArrayList<CustomerDetails> customers = new ArrayList<>();
 
     @Override
     public void action() {
-        try {
-            ACLMessage msg = myAgent.receive();
-            if (msg != null) {
-                System.out.println("Customer received: " + msg.getContent());
-                String senderName = msg.getSender().getName();
-                if (senderName=="CustomerHandler") handleCustomerHandlerMessage(msg);
-                else handleApplicationMessage(msg);
-            } else {
-                block();
+
+        Object[] args = myAgent.getArguments();
+
+        String input = (String) args[0];
+        System.out.println("Customer input: "+input);
+
+        handleApplicationMessage(input);
+
+        ACLMessage msg = myAgent.receive();
+        if (msg != null) {
+            try {
+                String contentReceived = msg.getContent();
+                System.out.println("Customer received: " + contentReceived);
+                args[1]= ((StringBuilder) args[1]).append(contentReceived);
+                myAgent.doWait(200);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            block();
         }
     }
-    public void handleCustomerHandlerMessage(ACLMessage msg) {
-        String content = msg.getContent();
 
-        //Nie jestem pewien tak tego stringa/jsona przesłać do aplikacji
-        /*ACLMessage newMsg = new ACLMessage(ACLMessage.REQUEST);
-        newMsg.addReceiver(new AID("Application", AID.ISLOCALNAME));
-        newMsg.setContent(content);
-        myAgent.send(newMsg);
-        ???*/
-    }
 
-    public void handleApplicationMessage(ACLMessage msg) {
-        String content = msg.getContent(); //zakładam, że dane z aplikacji otrzymujemy jako zbiorczy string
-        //zawierający dane o kliencie i pomyśle. Format stringa to ''objectData-customerData''
+    public void handleApplicationMessage(String content) {
         String[] parts = content.split("-");
         String object=parts[0];
         String user=parts[1];
-        JSONObject jsonObject = new JSONObject(object);
-        JSONObject jsonUser = new JSONObject(user);
+        JSONObject jObject = new JSONObject(object);
+        JSONObject jUser = new JSONObject(user);
 
-        Idea idea = new Idea(jsonObject);
+        Idea idea = new Idea(jObject);
         ideas.add(idea);
-        CustomerDetails customerDetails = new CustomerDetails(jsonUser);
+        CustomerDetails customerDetails = new CustomerDetails(jUser);
         customers.add(customerDetails);
 
         ACLMessage newMsgIdea = new ACLMessage(ACLMessage.REQUEST);
         newMsgIdea.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
         newMsgIdea.setContent(object);
         myAgent.send(newMsgIdea);
+        myAgent.doWait(200);
 
         ACLMessage newMsgUser = new ACLMessage(ACLMessage.REQUEST);
         newMsgUser.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
         newMsgUser.setContent(user);
         myAgent.send(newMsgUser);
-
-        //Nie wiem jak się zachowa program kiedy wysyłamy szeregowo 2 różne wiadomości do tego samego odbiorcy
-        //dlatego alternatywnie można będzie przesłać cały ''content'' do customerHandlera i dopiero tam
-        //rozbić go na 2 stringi
-    }
+        myAgent.doWait(200);
     }
 }
