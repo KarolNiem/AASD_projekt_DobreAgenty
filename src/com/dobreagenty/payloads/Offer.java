@@ -22,11 +22,21 @@ public class Offer {
         this.name="aa";
     }
 
-    public Offer(JSONObject json) {
-        id = UUID.randomUUID();//UUID.fromString(json.getString("id"));
-        name = json.getString("name");
+    public Offer(JSONObject json, boolean fromCustomer) {
         type = new OfferType(OfferTypeEnum.values()[json.getInt("type")]); // zmienione z "type"
         district = new District(DistrictEnum.values()[json.getInt("district")]);
+        name = json.getString("name");
+        if (fromCustomer) {
+            id = UUID.randomUUID();
+        }
+        else {
+            id = UUID.fromString(json.getString("id"));
+        }
+    }
+
+    public Offer(JSONObject json)
+    {
+        this(json, false);
     }
 
     public int getNumberOfTargetPopulation() {

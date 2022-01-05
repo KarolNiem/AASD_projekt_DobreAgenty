@@ -6,21 +6,18 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 import com.dobreagenty.payloads.Offer;
 
 public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
     public ArrayList<Offer> offers = new ArrayList<>();
     public ArrayList<EvaluationSummary> summaries = new ArrayList<>();
-    UUID currentID;
 
     @Override
     public void action() {
         try {
             ACLMessage msg = myAgent.receive();
-
-
-
             if (msg != null) {
                 String content = msg.getContent();
 
@@ -54,11 +51,11 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
 
-        Offer offer = new Offer(json);
+        Offer offer = new Offer(json, true);
         offers.add(offer);
         EvaluationSummary summary = new EvaluationSummary(offer);
         summaries.add(summary);
-        currentID = summary.getID();
+        content = offer.toString();
 
         ACLMessage newMsg = new ACLMessage(ACLMessage.REQUEST);
         newMsg.addReceiver(new AID("CostEvaluator", AID.ISLOCALNAME));
@@ -74,8 +71,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         CostEvaluation evaluation = new CostEvaluation(json);
-        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
-        EvaluationSummary summary = findSummaryWithID(currentID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
             summary.costEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -88,8 +84,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         AgeStructEvaluation evaluation = new AgeStructEvaluation(json);
-        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
-        EvaluationSummary summary = findSummaryWithID(currentID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
             summary.ageStructEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -102,8 +97,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         UsabilityEvaluation evaluation = new UsabilityEvaluation(json);
-        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
-        EvaluationSummary summary = findSummaryWithID(currentID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
             summary.usabilityEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -116,8 +110,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         BudgetEvaluation evaluation = new BudgetEvaluation(json);
-        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
-        EvaluationSummary summary = findSummaryWithID(currentID);
+        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
         if (summary != null) {
             summary.budgetEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -144,8 +137,8 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
     }
 
     private EvaluationSummary findSummaryWithID(UUID id) {
-        return summaries.stream()
-                .filter((s) -> s.offer.id == id)
+        return  summaries.stream()
+                .filter(s -> Objects.equals(s.offer.id.toString(), id.toString()))
                 .findFirst()
                 .orElse(null);
     }

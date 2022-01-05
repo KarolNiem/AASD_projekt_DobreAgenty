@@ -36,7 +36,7 @@ public class Main {
         StringBuilder output = new StringBuilder ();
         output.append("");
             try {
-                createAgents(container, input,output);
+                createAgents(container, input, output);
             } catch (StaleProxyException | InterruptedException e) {
                 e.printStackTrace();
             }

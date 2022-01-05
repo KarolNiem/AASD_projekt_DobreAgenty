@@ -24,7 +24,7 @@ public class CustomerAgent extends Agent {
 
         Object[] args = getArguments();
         if (args == null && args.length == 0) {
-            System.out.println("No agruments specified");
+            System.out.println("No arguments specified");
             doDelete();
         }
     }
