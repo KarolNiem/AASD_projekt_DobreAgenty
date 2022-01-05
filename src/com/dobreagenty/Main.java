@@ -52,8 +52,6 @@ public class Main {
 
             AgentController customer = container.createNewAgent("Customer",
                     "com.dobreagenty.agents.CustomerAgent", objects);
-            AgentController customerHandler = container.createNewAgent("CustomerHandler",
-                    "com.dobreagenty.agents.CustomerHandlerAgent", null);
             AgentController customerSystemInterface = container.createNewAgent("CustomerSystemInterface",
                     "com.dobreagenty.agents.CustomerSystemInterfaceAgent", null);
             AgentController costEvaluator = container.createNewAgent("CostEvaluator",
