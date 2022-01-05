@@ -8,4 +8,9 @@ public class UsabilityEvaluatorAgent extends Agent {
         addBehaviour(new UsabilityEvaluatorBehaviour());
         System.out.println("UsabilityEvaluator created.");
     }
+
+    protected void takeDown() {
+        System.out.println("UsabilityEvaluator dies.");
+        doDelete();
+    }
 }

@@ -8,4 +8,9 @@ public class BudgetCheckerAgent extends Agent {
         addBehaviour(new BudgetCheckerBehaviour());
         System.out.println("BudgetChecker created.");
     }
+
+    protected void takeDown() {
+        System.out.println("BudgetChecker dies.");
+        doDelete();
+    }
 }

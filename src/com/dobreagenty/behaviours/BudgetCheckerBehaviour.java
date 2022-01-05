@@ -12,6 +12,7 @@ public class BudgetCheckerBehaviour extends EvaluatorBehaviour {
         if (msg != null) {
             try {
                 String content = msg.getContent();
+                System.out.println("BudgetChecker received: " + content);
                 JSONObject json = new JSONObject(content);
                 Offer offer = new Offer(json);
                 BudgetEvaluation evaluation = new BudgetEvaluation(offer);

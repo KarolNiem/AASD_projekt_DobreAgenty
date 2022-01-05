@@ -29,6 +29,10 @@ public class EvaluationSummary {
                 usabilityEvaluation > 0 && budgetEvaluation > 0;
     }
 
+    public UUID getID() {
+        return offer.id;
+    }
+
     @Override
     public String toString() {
         JSONObject json = new JSONObject();

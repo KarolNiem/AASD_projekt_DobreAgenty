@@ -17,10 +17,15 @@ public class Offer {
         this.district = new District(districtEnum);
     }
 
+    public Offer(){
+        this.id=UUID.randomUUID();;
+        this.name="aa";
+    }
+
     public Offer(JSONObject json) {
-        id = UUID.fromString(json.getString("id"));
+        id = UUID.randomUUID();//UUID.fromString(json.getString("id"));
         name = json.getString("name");
-        type = new OfferType(OfferTypeEnum.values()[json.getInt("type")]);
+        type = new OfferType(OfferTypeEnum.values()[json.getInt("type")]); // zmienione z "type"
         district = new District(DistrictEnum.values()[json.getInt("district")]);
     }
 

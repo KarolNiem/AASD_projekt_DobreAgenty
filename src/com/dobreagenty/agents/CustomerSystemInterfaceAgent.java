@@ -8,4 +8,9 @@ public class CustomerSystemInterfaceAgent extends Agent {
         addBehaviour(new CustomerSystemInterfaceBehaviour());
         System.out.println("CustomerSystemInterface created.");
     }
+
+    protected void takeDown() {
+        System.out.println("CustomerSystemInterface dies.");
+        doDelete();
+    }
 }

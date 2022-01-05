@@ -18,7 +18,7 @@ public class Idea {
 
     public Idea(JSONObject json) {
         name = json.getString("name");
-        offerType = OfferTypeEnum.values()[json.getInt("offerType")];
+        offerType = OfferTypeEnum.values()[json.getInt("type")]; // bylo offerType
         district = DistrictEnum.values()[json.getInt("district")];
     }
 

@@ -8,4 +8,9 @@ public class CostEvaluatorAgent extends Agent {
         addBehaviour(new CostEvaluatorBehaviour());
         System.out.println("CostEvaluator created.");
     }
+
+    protected void takeDown() {
+        System.out.println("CostEvaluator dies.");
+        doDelete();
+    }
 }

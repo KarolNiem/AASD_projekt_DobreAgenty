@@ -7,6 +7,9 @@ import jade.core.Runtime;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
@@ -20,7 +23,7 @@ public class Main {
         JSONObject exampleCustomer=new JSONObject();
         //JSON Idea
         exampleObject.put("name","parking");
-        exampleObject.put("offerType",4);
+        exampleObject.put("type",4);
         exampleObject.put("district",2);
         //JSON customerDetails
         exampleCustomer.put("name","Johnny");
@@ -34,13 +37,13 @@ public class Main {
         output.append("");
             try {
                 createAgents(container, input,output);
-            } catch (StaleProxyException e) {
+            } catch (StaleProxyException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
 
-        private static void createAgents(AgentContainer container, String ez, StringBuilder e) throws StaleProxyException {
+        private static void createAgents(AgentContainer container, String ez, StringBuilder e) throws StaleProxyException, InterruptedException {
 
             Object[] objects = new Object[]{
                     ez,
@@ -65,13 +68,24 @@ public class Main {
                     "com.dobreagenty.agents.GlobalEvaluatorAgent", null);
 
             customer.start();
-            customerHandler.start();
-            for (int i = 0; i < 50000000; i++);
+            //customerHandler.start();
+            customerSystemInterface.start();
+            costEvaluator.start();
+            ageStructEvaluator.start();
+            usabilityEvaluator.start();
+            budgetChecker.start();
+            globalEvaluator.start();
+            TimeUnit.SECONDS.sleep(1);
             String singleString = e.toString();
-            //double str1 = Double.parseDouble(singleString);
-            System.out.println("Customer output: "+singleString);
-            for (int i = 0; i < 50000000; i++);
+            Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");
+            Matcher m = p.matcher(singleString);
+            double d = 0;
+            while(m.find()) {
+                d = Double.parseDouble(m.group(1));
+            }
+            System.out.println("Customer output: "+d);
             customer.kill();
+            //customerSystemInterface.kill();
             //customer.kill();
             //customerSystemInterface.start();
             //costEvaluator.start();

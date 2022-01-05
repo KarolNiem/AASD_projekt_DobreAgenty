@@ -28,9 +28,9 @@ public class GlobalEvaluatorBehaviour extends CyclicBehaviour {
     }
 
     private void sendEvaluationToCustomerHandler(Evaluation evaluation) {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
-        msg.setContent(evaluation.toString());
-        myAgent.send(msg);
+            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            msg.addReceiver(new AID("CustomerSystemInterface", AID.ISLOCALNAME));
+            msg.setContent(evaluation.toString());
+            myAgent.send(msg);
     }
 }

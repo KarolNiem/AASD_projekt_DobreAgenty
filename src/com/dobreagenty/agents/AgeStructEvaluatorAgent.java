@@ -8,4 +8,9 @@ public class AgeStructEvaluatorAgent extends Agent {
         addBehaviour(new AgeStructEvaluatorBehaviour());
         System.out.println("AgeStructEvaluator created.");
     }
+
+    protected void takeDown() {
+        System.out.println("AgeStructEvaluator dies.");
+        doDelete();
+    }
 }

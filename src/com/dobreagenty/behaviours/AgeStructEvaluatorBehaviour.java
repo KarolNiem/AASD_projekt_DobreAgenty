@@ -12,6 +12,7 @@ public class AgeStructEvaluatorBehaviour extends EvaluatorBehaviour {
         if (msg != null) {
             try {
                 String content = msg.getContent();
+                System.out.println("AgeStructEvaluator received: " + content);
                 JSONObject json = new JSONObject(content);
                 Offer offer = new Offer(json);
                 AgeStructEvaluation evaluation = new AgeStructEvaluation(offer);

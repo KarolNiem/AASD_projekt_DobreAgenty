@@ -7,25 +7,41 @@ import jade.lang.acl.ACLMessage;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.UUID;
+import com.dobreagenty.payloads.Offer;
 
 public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
     public ArrayList<Offer> offers = new ArrayList<>();
     public ArrayList<EvaluationSummary> summaries = new ArrayList<>();
+    UUID currentID;
 
     @Override
     public void action() {
         try {
             ACLMessage msg = myAgent.receive();
+
+
+
             if (msg != null) {
-                System.out.println("CustomerSystemInterface received: " + msg.getContent());
+                String content = msg.getContent();
+
+                System.out.println("CustomerSystemInterface received: " + msg.getContent()+" from "+msg.getSender().getName());
+                
+                JSONObject customerIdea =new JSONObject(content);
+
                 String senderName = msg.getSender().getName();
-                switch (senderName) {
-                    case "CustomerHandler" -> handleCustomerHandlerMessage(msg);
+                //System.out.println("senderNAme:" + senderName);
+                String[] parts = senderName.split("@");
+                String senderNameString=parts[0];
+                switch (senderNameString) {
+                    case "Customer" -> handleCustomerMessage(msg);
                     case "CostEvaluator" -> handleCostEvaluatorReply(msg);
                     case "AgeStructEvaluator" -> handleAgeStructEvaluatorReply(msg);
                     case "UsabilityEvaluator" -> handleUsabilityEvaluatorReply(msg);
                     case "BudgetChecker" -> handleBudgetCheckerReply(msg);
+                    case "GlobalEvaluator" -> handleGlobalEvaluatorReply(msg);
+
                 }
+
             } else {
                 block();
             }
@@ -34,7 +50,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         }
     }
 
-    public void handleCustomerHandlerMessage(ACLMessage msg) {
+    public void handleCustomerMessage(ACLMessage msg) {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
 
@@ -42,6 +58,7 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         offers.add(offer);
         EvaluationSummary summary = new EvaluationSummary(offer);
         summaries.add(summary);
+        currentID = summary.getID();
 
         ACLMessage newMsg = new ACLMessage(ACLMessage.REQUEST);
         newMsg.addReceiver(new AID("CostEvaluator", AID.ISLOCALNAME));
@@ -53,10 +70,12 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
     }
 
     public void handleCostEvaluatorReply(ACLMessage msg) {
+
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         CostEvaluation evaluation = new CostEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        EvaluationSummary summary = findSummaryWithID(currentID);
         if (summary != null) {
             summary.costEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -69,7 +88,8 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         AgeStructEvaluation evaluation = new AgeStructEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        EvaluationSummary summary = findSummaryWithID(currentID);
         if (summary != null) {
             summary.ageStructEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -82,7 +102,8 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         UsabilityEvaluation evaluation = new UsabilityEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        EvaluationSummary summary = findSummaryWithID(currentID);
         if (summary != null) {
             summary.usabilityEvaluation = evaluation.result;
             if (summary.isCompleted()) {
@@ -95,13 +116,21 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         String content = msg.getContent();
         JSONObject json = new JSONObject(content);
         BudgetEvaluation evaluation = new BudgetEvaluation(json);
-        EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        //EvaluationSummary summary = findSummaryWithID(evaluation.offer.id);
+        EvaluationSummary summary = findSummaryWithID(currentID);
         if (summary != null) {
             summary.budgetEvaluation = evaluation.result;
             if (summary.isCompleted()) {
                 sendSummaryToGlobalEvaluator(summary);
             }
         }
+    }
+
+    private void handleGlobalEvaluatorReply(ACLMessage msg) {
+        msg.addReceiver(new AID("Customer", AID.ISLOCALNAME));
+        msg.setContent(msg.getContent());
+        myAgent.send(msg);
+        myAgent.blockingReceive();
     }
 
     private void sendSummaryToGlobalEvaluator(EvaluationSummary summary) {

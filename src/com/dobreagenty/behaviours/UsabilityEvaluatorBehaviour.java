@@ -13,6 +13,7 @@ public class UsabilityEvaluatorBehaviour extends EvaluatorBehaviour {
         if (msg != null) {
             try {
                 String content = msg.getContent();
+                System.out.println("UsabilityEvaluator received: " + content);
                 JSONObject json = new JSONObject(content);
                 Offer offer = new Offer(json);
                 UsabilityEvaluation evaluation = new UsabilityEvaluation(offer);

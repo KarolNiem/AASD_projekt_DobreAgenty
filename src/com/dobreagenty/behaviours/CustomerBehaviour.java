@@ -34,12 +34,12 @@ public class CustomerBehaviour extends OneShotBehaviour {
             try {
                 String contentReceived = msg.getContent();
                 System.out.println("Customer received: " + contentReceived);
-                args[1]= ((StringBuilder) args[1]).append(contentReceived);
-                myAgent.doWait(200);
+                args[1] = ((StringBuilder) args[1]).append(contentReceived);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+         else {
             block();
         }
     }
@@ -58,15 +58,15 @@ public class CustomerBehaviour extends OneShotBehaviour {
         customers.add(customerDetails);
 
         ACLMessage newMsgIdea = new ACLMessage(ACLMessage.REQUEST);
-        newMsgIdea.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
+        newMsgIdea.addReceiver(new AID("customerSystemInterface", AID.ISLOCALNAME));
         newMsgIdea.setContent(object);
         myAgent.send(newMsgIdea);
         myAgent.doWait(200);
 
-        ACLMessage newMsgUser = new ACLMessage(ACLMessage.REQUEST);
-        newMsgUser.addReceiver(new AID("CustomerHandler", AID.ISLOCALNAME));
-        newMsgUser.setContent(user);
-        myAgent.send(newMsgUser);
-        myAgent.doWait(200);
+        //ACLMessage newMsgUser = new ACLMessage(ACLMessage.REQUEST);
+        //newMsgUser.addReceiver(new AID("customerSystemInterface", AID.ISLOCALNAME));
+        //newMsgUser.setContent(user);
+        //myAgent.send(newMsgUser);
+        //myAgent.doWait(200);
     }
 }
