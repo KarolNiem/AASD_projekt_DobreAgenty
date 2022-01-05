@@ -57,6 +57,10 @@ public class District {
         };
     }
 
+    public int getTotalPopulation(DistrictEnum district) {
+        return getNumberOfChildren(district) + getNumberOfAdults(district) + getNumberOfSeniors(district);
+    }
+
     public int getNumberOfChildren(DistrictEnum district) {
         return switch (district) {
             case Srodmiescie -> 12794;

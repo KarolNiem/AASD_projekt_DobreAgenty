@@ -23,7 +23,7 @@ public class Main {
         JSONObject exampleCustomer=new JSONObject();
         //JSON Idea
         exampleObject.put("name","parking");
-        exampleObject.put("type",4);
+        exampleObject.put("type",7);
         exampleObject.put("district",2);
         //JSON customerDetails
         exampleCustomer.put("name","Johnny");

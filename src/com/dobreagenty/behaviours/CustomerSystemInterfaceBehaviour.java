@@ -52,6 +52,8 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         JSONObject json = new JSONObject(content);
 
         Offer offer = new Offer(json, true);
+        System.out.println(offer.getNumberOfTargetPopulation());
+        System.out.println(offer.district.getTotalPopulation(offer.district.districtEnum));
         offers.add(offer);
         EvaluationSummary summary = new EvaluationSummary(offer);
         summaries.add(summary);

@@ -25,8 +25,8 @@ public class EvaluationSummary {
     }
 
     public boolean isCompleted() {
-        return costEvaluation > 0 && ageStructEvaluation > 0 &&
-                usabilityEvaluation > 0 && budgetEvaluation > 0;
+        return costEvaluation >= 0 && ageStructEvaluation >= 0 &&
+                usabilityEvaluation >= 0 && budgetEvaluation >= 0;
     }
 
     public UUID getID() {

@@ -16,7 +16,8 @@ public class AgeStructEvaluation extends BaseEvaluation {
 
     @Override
     public void evaluate() {
-        result = Math.min(1, 2 * offer.getNumberOfTargetPopulation());
+        result = Math.min(1, 2 * Double.valueOf(offer.getNumberOfTargetPopulation())
+                / Double.valueOf(offer.district.getTotalPopulation(offer.district.districtEnum)));
     }
 
     @Override
