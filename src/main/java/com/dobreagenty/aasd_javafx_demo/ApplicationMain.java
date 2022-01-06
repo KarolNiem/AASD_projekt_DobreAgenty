@@ -12,7 +12,6 @@ public class ApplicationMain extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlhelloViewLoader = new FXMLLoader(ApplicationMain.class.getResource("/view/hello-view.fxml"));
         Scene sceneHelloView = new Scene(fxmlhelloViewLoader.load(), 800, 600);
-
         stage.setTitle("DobreAgentyApp");
         stage.setScene(sceneHelloView);
         stage.show();

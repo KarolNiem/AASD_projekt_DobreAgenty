@@ -19,7 +19,7 @@
           </padding>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj w aplikacji Dobre Agenty" />
-             <Button onAction="#onHelloButtonClick" text="Zgłoś projekt!" />
+             <Button onAction="#switchToPersonalQuestionnaireView" text="Zgłoś projekt!" />
          </children>
       </VBox>
    </children>

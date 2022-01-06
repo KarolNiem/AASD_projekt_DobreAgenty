@@ -7,27 +7,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane stylesheets="@../cssStyle/ideaCreatorViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa projektu " />
-            <TextField />
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa projektu " />
+                  <Pane prefHeight="30.0" prefWidth="42.0" />
+                  <TextField prefHeight="26.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="38.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ projektu " />
+                  <Pane prefHeight="5.0" prefWidth="59.0" />
+                  <ComboBox prefHeight="25.0" prefWidth="200.0" promptText="&lt;Wybierz typ projektu&gt;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="34.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dzielnica " />
+                  <Pane prefHeight="34.0" prefWidth="76.0" />
+                  <ComboBox prefHeight="25.0" prefWidth="200.0" promptText="&lt;Wybierz dzielnicę&gt;" />
+               </children>
+            </HBox>
+            <Pane prefHeight="25.0" prefWidth="600.0" />
+            <Button mnemonicParsing="false" onAction="#switchToLoadingScreenView" text="Zatwierdź" />
          </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ projektu " />
-            <ComboBox prefHeight="25.0" prefWidth="175.0" promptText="&lt;Wybierz typ projektu&gt;" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dzielnica " />
-            <ComboBox prefHeight="25.0" prefWidth="175.0" promptText="&lt;Wybierz dzielnicę&gt;" />
-         </children>
-      </HBox>
-      <Button mnemonicParsing="false" onAction="#OnConfirmIdeaButtonClick" text="Zatwierdź" />
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>

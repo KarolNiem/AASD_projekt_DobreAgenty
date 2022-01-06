@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,9 +8,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Generowanie oceny..." />
-      <ProgressBar prefWidth="200.0" progress="0.0" />
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/loadingAnimation.gif" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Generowanie oceny...">
+               <font>
+                  <Font size="24.0" />
+               </font></Text>
+            <ProgressBar prefHeight="21.0" prefWidth="372.0" progress="0.0" />
+            <Button mnemonicParsing="false" onAction="#switchToIdeaEvaluationView" prefHeight="32.0" prefWidth="121.0" text="Skończ oceniać" />
+         </children>
+      </VBox>
    </children>
-</VBox>
+</AnchorPane>
