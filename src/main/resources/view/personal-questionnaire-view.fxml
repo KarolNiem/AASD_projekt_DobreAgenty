@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane stylesheets="@../cssStyle/personalQuestionnaireViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="800.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />
+                  <Pane prefHeight="41.0" prefWidth="66.0" />
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" />
+                  <Pane prefHeight="40.0" prefWidth="38.0" />
+                  <TextField />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="45.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mail" />
+                  <Pane prefHeight="45.0" prefWidth="65.0" />
+                  <TextField prefHeight="6.0" prefWidth="149.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="34.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefon" />
+                  <Pane prefHeight="34.0" prefWidth="47.0" />
+                  <TextField />
+               </children>
+            </HBox>
+            <Pane prefHeight="25.0" prefWidth="600.0" />
+            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToIdeaCreatorView" prefHeight="2.0" prefWidth="68.0" text="Zatwierdź" textAlignment="CENTER" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
