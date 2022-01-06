@@ -3,5 +3,4 @@ target/
 /APDescription.txt
 /MTPs-Main-Container.txt
 .idea/vcs.xml
-.idea/modules.xml
-.idea/libraries/
+.idea/libraries/Maven_*
