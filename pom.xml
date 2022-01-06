@@ -113,7 +113,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.dobreagenty.aasd_javafx_demo/com.dobreagenty.aasd_javafx_demo.HelloApplication
+                                com.dobreagenty.aasd_javafx_demo/com.dobreagenty.aasd_javafx_demo.ApplicationMain
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
