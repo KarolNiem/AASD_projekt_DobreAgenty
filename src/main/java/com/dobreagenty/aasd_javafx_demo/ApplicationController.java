@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class ApplicationController implements EvaluationListener {
 
@@ -66,7 +67,9 @@ public class ApplicationController implements EvaluationListener {
     public void initializeIdeaDistrictComboBox(){
         ArrayList<String> districtList = new ArrayList<>();
         for(var value : DistrictEnum.values()){
-            districtList.add(value.toString());
+            if (value != DistrictEnum.Average){
+                districtList.add(value.toString());
+            }
         }
         ideaDistrict.getItems().setAll(districtList);
     }
@@ -168,8 +171,9 @@ public class ApplicationController implements EvaluationListener {
 
     public void handleEvaluationText(MouseEvent mouseEvent) {
         double eval = AgentThread.getEvaluationValue();
+        DecimalFormat df = new DecimalFormat("#.###");
         if (evaluationText != null && eval != 0){
-            evaluationText.setText(String.valueOf(eval));
+            evaluationText.setText(String.valueOf(df.format(eval)));
         }
     }
 }
