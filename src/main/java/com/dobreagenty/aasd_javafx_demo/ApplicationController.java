@@ -59,7 +59,7 @@ public class ApplicationController {
     }
 
     public void handleQuestionnaireConfirmButton(ActionEvent event){
-        if (!questionnaireName.getText().isEmpty() || !questionnaireSurname.getText().isEmpty() || !questionnaireMail.getText().isEmpty() || !questionnairePhone.getText().isEmpty()) {
+        if (!questionnaireName.getText().isEmpty() && !questionnaireSurname.getText().isEmpty() && !questionnaireMail.getText().isEmpty() && !questionnairePhone.getText().isEmpty()) {
             try{
                 createCustomerData();
                 switchToIdeaCreatorView(event);
@@ -75,7 +75,7 @@ public class ApplicationController {
     }
 
     public void handleIdeaConfirmButton(ActionEvent event) {
-        if (!ideaName.getText().isEmpty()) {
+        if (!ideaName.getText().isEmpty() && ideaType.getValue() != null && ideaDistrict.getValue() != null) {
             try{
                 createIdeaData();
                 switchToLoadingScreenView(event);
