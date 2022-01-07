@@ -1,3 +1,6 @@
 out/
+target/
 /APDescription.txt
 /MTPs-Main-Container.txt
+.idea/vcs.xml
+.idea/libraries/Maven_*

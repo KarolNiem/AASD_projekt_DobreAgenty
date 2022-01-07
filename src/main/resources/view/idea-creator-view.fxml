@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane stylesheets="@../cssStyle/ideaCreatorViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="ideaEmptyError" textFill="RED" />
+            <HBox alignment="CENTER" prefHeight="44.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa projektu " />
+                  <Pane prefHeight="30.0" prefWidth="42.0" />
+                  <TextField fx:id="ideaName" prefHeight="26.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="38.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ projektu " />
+                  <Pane prefHeight="5.0" prefWidth="59.0" />
+                  <ComboBox fx:id="ideaType" onShowing="#initializeIdeaTypeComboBox" prefHeight="25.0" prefWidth="200.0" promptText="&lt;Wybierz typ projektu&gt;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="34.0" prefWidth="600.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dzielnica " />
+                  <Pane prefHeight="34.0" prefWidth="76.0" />
+                  <ComboBox fx:id="ideaDistrict" onShowing="#initializeIdeaDistrictComboBox" prefHeight="25.0" prefWidth="200.0" promptText="&lt;Wybierz dzielnicę&gt;" />
+               </children>
+            </HBox>
+            <Pane prefHeight="25.0" prefWidth="600.0" />
+            <Button fx:id="ideaConfirmButton" mnemonicParsing="false" onAction="#handleIdeaConfirmButton" text="Zatwierdź" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
