@@ -12,7 +12,7 @@
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/loadingAnimation.gif" />
                </image>
@@ -21,7 +21,6 @@
                <font>
                   <Font size="24.0" />
                </font></Text>
-            <ProgressBar prefHeight="21.0" prefWidth="372.0" progress="0.0" />
          </children>
       </VBox>
    </children>

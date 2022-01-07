@@ -11,15 +11,20 @@
 
 <AnchorPane prefHeight="601.0" prefWidth="800.0" stylesheets="@../cssStyle/ideaEvaluationViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="789.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="800.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena zgłoszonego pomysłu:" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pomysł został oceniony!" textAlignment="CENTER" wrappingWidth="155.44140625" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
                <children>
-                  <Label fx:id="evaluationText" text="X,X" />
+                  <Label fx:id="evaluationText" text=" ">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Label>
                </children>
             </HBox>
-            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="31.0" prefWidth="138.0" text="Wróć do menu" textAlignment="CENTER" />
+            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#handleEvaluationText" prefHeight="25.0" prefWidth="138.0" text="Pokaż ocenę" textAlignment="CENTER" />
+            <Pane prefHeight="10.0" prefWidth="200.0" />
+            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="25.0" prefWidth="138.0" text="Wróć do menu" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

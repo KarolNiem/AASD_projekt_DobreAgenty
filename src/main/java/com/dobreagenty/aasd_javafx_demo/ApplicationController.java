@@ -169,7 +169,7 @@ public class ApplicationController implements EvaluationListener {
         stage.show();
     }
 
-    public void handleEvaluationText(MouseEvent mouseEvent) {
+    public void handleEvaluationText(ActionEvent event) {
         double eval = AgentThread.getEvaluationValue();
         DecimalFormat df = new DecimalFormat("#.###");
         if (evaluationText != null && eval != 0){
