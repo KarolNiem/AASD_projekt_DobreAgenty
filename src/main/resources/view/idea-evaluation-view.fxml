@@ -17,11 +17,6 @@
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
                <children>
                   <Label fx:id="evaluationText" text="X,X" />
-                  <ImageView fitHeight="40.0" fitWidth="200.0" onMouseMoved="#handleEvaluationText" pickOnBounds="true" preserveRatio="true">
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </ImageView>
                </children>
             </HBox>
             <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="31.0" prefWidth="138.0" text="Wróć do menu" textAlignment="CENTER" />
