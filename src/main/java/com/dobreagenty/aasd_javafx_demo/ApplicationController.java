@@ -1,5 +1,6 @@
 package com.dobreagenty.aasd_javafx_demo;
 
+import com.dobreagenty.AgentThread;
 import com.dobreagenty.misc.DistrictEnum;
 import com.dobreagenty.misc.OfferTypeEnum;
 import javafx.application.Application;
@@ -79,6 +80,9 @@ public class ApplicationController {
             try{
                 createIdeaData();
                 switchToLoadingScreenView(event);
+
+                AgentThread agentThread = new AgentThread(ideaData, customerData);
+                agentThread.start();
             }
             catch(IOException e) {
                 System.err.println(e);
