@@ -1,33 +1,35 @@
 package com.dobreagenty;
 
-import jade.wrapper.AgentContainer;
+import com.dobreagenty.aasd_javafx_demo.EvaluationListener;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
+import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
+import org.json.JSONObject;
 
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.JSONObject;
-
 public class AgentThread extends Thread {
 
     private final JSONObject idea;
     private final JSONObject customer;
+    private static double evaluation;
+    private final EvaluationListener listener;
 
-    public AgentThread(JSONObject ideaData, JSONObject customerData){
+    public AgentThread(JSONObject ideaData, JSONObject customerData, EvaluationListener listenerData){
         this.idea = ideaData;
         this.customer = customerData;
+        this.listener = listenerData;
     }
     public void run(){
         setUpAgentEnvironment(idea, customer);
     }
 
-
-    public static void setUpAgentEnvironment(JSONObject ideaObject, JSONObject customerObject) {
+    public void setUpAgentEnvironment(JSONObject ideaObject, JSONObject customerObject) {
         Profile profile = new ProfileImpl();
         AgentContainer container = Runtime.instance().createMainContainer(profile);
 
@@ -36,15 +38,18 @@ public class AgentThread extends Thread {
         String input = ideaObject.toString()+"-"+customerObject.toString();
         StringBuilder output = new StringBuilder ();
         output.append("");
-            try {
-                createAgents(container, input, output);
-            } catch (StaleProxyException | InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            createAgents(container, input, output);
+        } catch (StaleProxyException | InterruptedException e) {
+            e.printStackTrace();
         }
+    }
 
+    public static double getEvaluationValue(){
+        return evaluation;
+    }
 
-    private static void createAgents(AgentContainer container, String ez, StringBuilder e) throws StaleProxyException, InterruptedException {
+    private void createAgents(AgentContainer container, String ez, StringBuilder e) throws StaleProxyException, InterruptedException {
 
         Object[] objects = new Object[]{
                 ez,
@@ -83,6 +88,8 @@ public class AgentThread extends Thread {
             d = Double.parseDouble(m.group(1));
         }
         System.out.println("Customer output: "+d);
+        evaluation = d;
+        listener.onEvent();
         customer.kill();
         //customerSystemInterface.kill();
         //customer.kill();

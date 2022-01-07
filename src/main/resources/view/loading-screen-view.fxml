@@ -22,7 +22,6 @@
                   <Font size="24.0" />
                </font></Text>
             <ProgressBar prefHeight="21.0" prefWidth="372.0" progress="0.0" />
-            <Button mnemonicParsing="false" onAction="#switchToIdeaEvaluationView" prefHeight="32.0" prefWidth="121.0" text="Skończ oceniać" />
          </children>
       </VBox>
    </children>

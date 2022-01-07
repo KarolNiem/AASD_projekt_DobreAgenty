@@ -3,26 +3,24 @@ package com.dobreagenty.aasd_javafx_demo;
 import com.dobreagenty.AgentThread;
 import com.dobreagenty.misc.DistrictEnum;
 import com.dobreagenty.misc.OfferTypeEnum;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ApplicationController {
+public class ApplicationController implements EvaluationListener {
 
     private Stage stage;
     private Scene scene;
@@ -40,11 +38,25 @@ public class ApplicationController {
     @FXML private ComboBox<String> ideaDistrict;
     @FXML private Label ideaEmptyError;
 
+    @FXML private Label evaluationText;
+
     private static JSONObject ideaData;
     private static JSONObject customerData;
 
+    @Override
+    public void onEvent() {
+        Platform.runLater(() -> {
+            try {
+                switchToIdeaEvaluationView();
+            } catch (IOException e) {
+                System.err.println(e);
+                e.printStackTrace();
+            }
+        });
+    }
+
     public void initializeIdeaTypeComboBox(){
-        ArrayList<String> typeList = new ArrayList<String>();
+        ArrayList<String> typeList = new ArrayList<>();
         for(var value : OfferTypeEnum.values()){
             typeList.add(value.toString());
         }
@@ -52,7 +64,7 @@ public class ApplicationController {
     }
 
     public void initializeIdeaDistrictComboBox(){
-        ArrayList<String> districtList = new ArrayList<String>();
+        ArrayList<String> districtList = new ArrayList<>();
         for(var value : DistrictEnum.values()){
             districtList.add(value.toString());
         }
@@ -81,7 +93,7 @@ public class ApplicationController {
                 createIdeaData();
                 switchToLoadingScreenView(event);
 
-                AgentThread agentThread = new AgentThread(ideaData, customerData);
+                AgentThread agentThread = new AgentThread(ideaData, customerData, this);
                 agentThread.start();
             }
             catch(IOException e) {
@@ -145,13 +157,19 @@ public class ApplicationController {
         stage.show();
     }
 
-    public void switchToIdeaEvaluationView(ActionEvent event) throws IOException {
+    public void switchToIdeaEvaluationView() throws IOException {
         fxmlLoader = new FXMLLoader(ApplicationMain.class.getResource("/view/idea-evaluation-view.fxml"));
         root = fxmlLoader.load();
         scene = new Scene(root);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = ApplicationMain.getMainStage();
         stage.setScene(scene);
         stage.show();
     }
 
+    public void handleEvaluationText(MouseEvent mouseEvent) {
+        double eval = AgentThread.getEvaluationValue();
+        if (evaluationText != null && eval != 0){
+            evaluationText.setText(String.valueOf(eval));
+        }
+    }
 }

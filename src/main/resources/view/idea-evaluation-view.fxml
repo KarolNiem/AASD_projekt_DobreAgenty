@@ -16,8 +16,8 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena zgłoszonego pomysłu:" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="X,X" />
-                  <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <Label fx:id="evaluationText" text="X,X" />
+                  <ImageView fitHeight="40.0" fitWidth="200.0" onMouseMoved="#handleEvaluationText" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
                         <Insets left="50.0" />
                      </HBox.margin>
