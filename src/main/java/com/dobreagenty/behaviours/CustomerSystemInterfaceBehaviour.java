@@ -26,7 +26,6 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
                 JSONObject customerIdea =new JSONObject(content);
 
                 String senderName = msg.getSender().getName();
-                //System.out.println("senderNAme:" + senderName);
                 String[] parts = senderName.split("@");
                 String senderNameString=parts[0];
                 switch (senderNameString) {
@@ -52,8 +51,6 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
         JSONObject json = new JSONObject(content);
 
         Offer offer = new Offer(json, true);
-        System.out.println(offer.getNumberOfTargetPopulation());
-        System.out.println(offer.district.getTotalPopulation(offer.district.districtEnum));
         offers.add(offer);
         EvaluationSummary summary = new EvaluationSummary(offer);
         summaries.add(summary);

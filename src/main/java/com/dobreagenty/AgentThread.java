@@ -33,8 +33,6 @@ public class AgentThread extends Thread {
         Profile profile = new ProfileImpl();
         AgentContainer container = Runtime.instance().createMainContainer(profile);
 
-        //W docelowej wersji, jak będziemy otrzymywać faktyczne wyniki przerobię output na double,
-        //póki co do testów jest stringiem
         String input = ideaObject.toString()+"-"+customerObject.toString();
         StringBuilder output = new StringBuilder ();
         output.append("");
@@ -72,7 +70,6 @@ public class AgentThread extends Thread {
                 "com.dobreagenty.agents.GlobalEvaluatorAgent", null);
 
         customer.start();
-        //customerHandler.start();
         customerSystemInterface.start();
         costEvaluator.start();
         ageStructEvaluator.start();
@@ -91,13 +88,5 @@ public class AgentThread extends Thread {
         evaluation = d;
         listener.onEvent();
         customer.kill();
-        //customerSystemInterface.kill();
-        //customer.kill();
-        //customerSystemInterface.start();
-        //costEvaluator.start();
-        //usabilityEvaluator.start();
-        //ageStructEvaluator.start();
-        //budgetChecker.start();
-        //globalEvaluator.start();
     }
 }
