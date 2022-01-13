@@ -77,14 +77,37 @@ public class AgentThread extends Thread {
         budgetChecker.start();
         globalEvaluator.start();
         TimeUnit.SECONDS.sleep(1);
-        String singleString = e.toString();
-        Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");
-        Matcher m = p.matcher(singleString);
-        double d = 0;
-        while(m.find()) {
-            d = Double.parseDouble(m.group(1));
+        String singleString = e.toString();                // Te linijki będą do wywalenia jak zajdą zmiany we frontendzie
+        Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");  //
+        Matcher m = p.matcher(singleString);               //
+        double d = 0;                                      //
+        while(m.find()) {                                  //
+            d = Double.parseDouble(m.group(1));            //
+        }                                                  //
+        double[] frontendStructure = new double[4];
+        String str = e.toString();
+        Pattern pattern = Pattern.compile("\"result\":(.*?),", Pattern.DOTALL);
+        Pattern pattern2 = Pattern.compile("\"costResult\":(.*?),", Pattern.DOTALL);
+        Pattern pattern3 = Pattern.compile("\"ageStructResult\":(.*?),", Pattern.DOTALL);
+        Pattern pattern4 = Pattern.compile("\"usabilityResult\":(.*?)}", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(str);
+        Matcher matcher2 = pattern2.matcher(str);
+        Matcher matcher3 = pattern3.matcher(str);
+        Matcher matcher4 = pattern4.matcher(str);
+        while (matcher.find()) {
+            frontendStructure[0] = Double.parseDouble(matcher.group(1));
         }
-        System.out.println("Customer output: "+d);
+        while (matcher2.find()) {
+            frontendStructure[1] = Double.parseDouble(matcher2.group(1));
+        }
+        while (matcher3.find()) {
+            frontendStructure[2] = Double.parseDouble(matcher3.group(1));
+        }
+        while (matcher4.find()) {
+            frontendStructure[3] = Double.parseDouble(matcher4.group(1));
+        }
+        System.out.println("Customer output: "+frontendStructure[0]+", "+frontendStructure[1]+", "+frontendStructure[2]+", "+frontendStructure[3]);
+        //evaluation = frontendStructure
         evaluation = d;
         listener.onEvent();
         customer.kill();
