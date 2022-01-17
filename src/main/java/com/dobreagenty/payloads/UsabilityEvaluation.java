@@ -19,6 +19,7 @@ public class UsabilityEvaluation extends BaseEvaluation{
         double averageCoeff = getAveragePlacesPerPerson();
         double pop = offer.getNumberOfTargetPopulation();
         double places = offer.district.getNumberOfPlaces(offer.district.districtEnum, offer.type.type);
+        if(pop==0) pop=0.00001;
         double coeff = places / pop;
         // Value between 0 and 1, 0.5 if average, 0.0 if twice as many as average
         result = Math.min(1, Math.max(0, 1 - 0.5 * coeff / averageCoeff));

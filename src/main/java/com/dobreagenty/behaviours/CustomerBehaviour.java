@@ -16,8 +16,13 @@ import jade.core.Agent;
 import java.util.ArrayList;
 
 public class CustomerBehaviour extends OneShotBehaviour {
-    public ArrayList<Idea> ideas = new ArrayList<>();
-    public ArrayList<CustomerDetails> customers = new ArrayList<>();
+    public static ArrayList<Idea> ideas = new ArrayList<>();
+    public static ArrayList<CustomerDetails> customers = new ArrayList<>();
+    static Object arg=null;
+    static JSONObject[] PreprocessedData= new JSONObject[2];
+
+
+
 
     @Override
     public void action() {
@@ -25,7 +30,7 @@ public class CustomerBehaviour extends OneShotBehaviour {
         Object[] args = myAgent.getArguments();
 
         String input = (String) args[0];
-        System.out.println("Customer input: "+input);
+        System.out.println("Customer input: " + input);
 
         handleApplicationMessage(input);
 
@@ -35,11 +40,12 @@ public class CustomerBehaviour extends OneShotBehaviour {
                 String contentReceived = msg.getContent();
                 System.out.println("Customer received: " + contentReceived);
                 args[1] = ((StringBuilder) args[1]).append(contentReceived);
+                arg=args[1];
+                actionTest();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-         else {
+        } else {
             block();
         }
     }
@@ -47,10 +53,14 @@ public class CustomerBehaviour extends OneShotBehaviour {
 
     public void handleApplicationMessage(String content) {
         String[] parts = content.split("-");
-        String object=parts[0];
-        String user=parts[1];
+        String object = parts[0];
+        String user = parts[1];
         JSONObject jObject = new JSONObject(object);
         JSONObject jUser = new JSONObject(user);
+        PreprocessedData[0]=jObject;
+        PreprocessedData[1]=jUser;
+        handleApplicationMessageTest();
+
 
         Idea idea = new Idea(jObject);
         ideas.add(idea);
@@ -68,5 +78,18 @@ public class CustomerBehaviour extends OneShotBehaviour {
         //newMsgUser.setContent(user);
         //myAgent.send(newMsgUser);
         //myAgent.doWait(200);
+    }
+
+    public static JSONObject[] handleApplicationMessageTest() {
+
+        return PreprocessedData;
+
+    }
+
+    public static Object actionTest() {
+
+
+        return arg;
+
     }
 }
