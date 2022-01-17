@@ -5,15 +5,24 @@ import org.json.JSONObject;
 public class Evaluation {
     public Offer offer;
     public double result;
+    public double costResult;
+    public double ageStructResult;
+    public double usabilityResult;
 
     public Evaluation(EvaluationSummary summary) {
         offer = summary.offer;
         result = evaluate(summary);
+        costResult=summary.costEvaluation;
+        ageStructResult=summary.ageStructEvaluation;
+        usabilityResult=summary.usabilityEvaluation;
     }
 
     public Evaluation(JSONObject json) {
         offer = new Offer(json);
         result = json.getDouble("result");
+        costResult = json.getDouble("costResult");
+        ageStructResult=json.getDouble("ageStructResult");
+        usabilityResult=json.getDouble("usabilityResult");
     }
 
     public double evaluate(EvaluationSummary summary) {
@@ -32,6 +41,9 @@ public class Evaluation {
         json.put("type", offer.type.type.ordinal());
         json.put("district", offer.district.districtEnum.ordinal());
         json.put("result", result);
+        json.put("costResult",costResult);
+        json.put("ageStructResult",ageStructResult);
+        json.put("usabilityResult",usabilityResult);
         return json.toString();
     }
 }
