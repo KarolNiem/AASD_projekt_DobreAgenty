@@ -12,6 +12,8 @@ public class EvaluationSummary {
     public double usabilityEvaluation = -1.0;
     public int budgetEvaluation = -1;
 
+    public EvaluationSummary() { }
+
     public EvaluationSummary(Offer offer) {
         this.offer = offer;
     }

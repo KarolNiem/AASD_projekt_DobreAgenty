@@ -35,7 +35,6 @@ public class CustomerSystemInterfaceBehaviour extends CyclicBehaviour {
                     case "UsabilityEvaluator" -> handleUsabilityEvaluatorReply(msg);
                     case "BudgetChecker" -> handleBudgetCheckerReply(msg);
                     case "GlobalEvaluator" -> handleGlobalEvaluatorReply(msg);
-
                 }
 
             } else {

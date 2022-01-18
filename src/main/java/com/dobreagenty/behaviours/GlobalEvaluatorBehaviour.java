@@ -13,11 +13,7 @@ public class GlobalEvaluatorBehaviour extends CyclicBehaviour {
         try {
             ACLMessage msg = myAgent.receive();
             if (msg != null) {
-                String content = msg.getContent();
-                System.out.println("GlobalEvaluator received: " + content);
-                JSONObject json = new JSONObject(content);
-                EvaluationSummary summary = new EvaluationSummary(json);
-                Evaluation evaluation = new Evaluation(summary);
+                Evaluation evaluation = evaluate(msg);
                 sendEvaluationToCustomerHandler(evaluation);
             } else {
                 block();
@@ -25,6 +21,14 @@ public class GlobalEvaluatorBehaviour extends CyclicBehaviour {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Evaluation evaluate(ACLMessage msg) {
+        String content = msg.getContent();
+        System.out.println("GlobalEvaluator received: " + content);
+        JSONObject json = new JSONObject(content);
+        EvaluationSummary summary = new EvaluationSummary(json);
+        return new Evaluation(summary);
     }
 
     private void sendEvaluationToCustomerHandler(Evaluation evaluation) {
