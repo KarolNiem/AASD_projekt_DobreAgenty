@@ -17,7 +17,7 @@ public class AgentThread extends Thread {
 
     private final JSONObject idea;
     private final JSONObject customer;
-    private static double evaluation;
+    private static double[] evaluation;
     private final EvaluationListener listener;
 
     public AgentThread(JSONObject ideaData, JSONObject customerData, EvaluationListener listenerData){
@@ -43,7 +43,7 @@ public class AgentThread extends Thread {
         }
     }
 
-    public static double getEvaluationValue(){
+    public static double[] getEvaluationValue(){
         return evaluation;
     }
 
@@ -77,13 +77,6 @@ public class AgentThread extends Thread {
         budgetChecker.start();
         globalEvaluator.start();
         TimeUnit.SECONDS.sleep(1);
-        String singleString = e.toString();                // Te linijki będą do wywalenia jak zajdą zmiany we frontendzie
-        Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");  //
-        Matcher m = p.matcher(singleString);               //
-        double d = 0;                                      //
-        while(m.find()) {                                  //
-            d = Double.parseDouble(m.group(1));            //
-        }                                                  //
         double[] frontendStructure = new double[4];
         String str = e.toString();
         Pattern pattern = Pattern.compile("\"result\":(.*?),", Pattern.DOTALL);
@@ -107,8 +100,7 @@ public class AgentThread extends Thread {
             frontendStructure[3] = Double.parseDouble(matcher4.group(1));
         }
         System.out.println("Customer output: "+frontendStructure[0]+", "+frontendStructure[1]+", "+frontendStructure[2]+", "+frontendStructure[3]);
-        //evaluation = frontendStructure
-        evaluation = d;
+        evaluation = frontendStructure;
         listener.onEvent();
         customer.kill();
     }

@@ -170,10 +170,10 @@ public class ApplicationController implements EvaluationListener {
     }
 
     public void handleEvaluationText(ActionEvent event) {
-        double eval = AgentThread.getEvaluationValue();
+        double[] eval = AgentThread.getEvaluationValue();
         DecimalFormat df = new DecimalFormat("#.###");
-        if (evaluationText != null && eval != 0){
-            evaluationText.setText(String.valueOf(df.format(eval)));
+        if (evaluationText != null && eval[0] != 0){
+            evaluationText.setText(String.valueOf(df.format(eval[0])));
         }
     }
 }
