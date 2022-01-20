@@ -11,7 +11,7 @@
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="800.0">
          <children>
-            <Label fx:id="questionnaireEmptyError" textFill="RED" />
+            <Label fx:id="questionnaireError" textFill="RED" />
             <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />

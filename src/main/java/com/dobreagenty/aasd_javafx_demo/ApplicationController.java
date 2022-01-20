@@ -38,7 +38,7 @@ public class ApplicationController implements EvaluationListener {
     @FXML
     private TextField questionnairePhone;
     @FXML
-    private Label questionnaireEmptyError;
+    private Label questionnaireError;
 
     @FXML
     private TextField ideaName;
@@ -157,15 +157,26 @@ public class ApplicationController implements EvaluationListener {
 
     public void handleQuestionnaireConfirmButton(ActionEvent event) {
         if (!questionnaireName.getText().isEmpty() && !questionnaireSurname.getText().isEmpty() && !questionnaireMail.getText().isEmpty() && !questionnairePhone.getText().isEmpty()) {
-            try {
-                createCustomerData();
-                switchToIdeaCreatorView(event);
-            } catch (IOException e) {
-                System.err.println(e);
-                e.printStackTrace();
+            String regexMail = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+            String regexPhoneNumber = "^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{3}$";
+            if (questionnaireMail.getText().matches(regexMail)) {
+                if (questionnairePhone.getText().matches(regexPhoneNumber)) {
+                    try {
+                        createCustomerData();
+                        switchToIdeaCreatorView(event);
+                    } catch (IOException e) {
+                        System.err.println(e);
+                        e.printStackTrace();
+                    }
+                } else {
+                    questionnaireError.setText("Wprowadzony numer telefonu jest niepoprawny. Spróbuj ponownie.");
+                }
+            } else {
+                questionnaireError.setText("Wprowadzony mail jest niepoprawny. Spróbuj ponownie.");
             }
+
         } else {
-            questionnaireEmptyError.setText("Aby przejść dalej, wypełnij wszystkie pola.");
+            questionnaireError.setText("Aby przejść dalej, wypełnij wszystkie pola.");
         }
     }
 
