@@ -17,6 +17,7 @@ public class AgentThread extends Thread {
 
     private final JSONObject idea;
     private final JSONObject customer;
+  
     private static double evaluation;
     private static double[] frontendStructure = new double[5];
     private static EvaluationListener listener = null;
@@ -61,7 +62,12 @@ public class AgentThread extends Thread {
     }
 
     public static double getEvaluationValue() {
+
         return evaluation;
+    }
+  
+    public static double[] getFrontendStructureValue(){
+        return frontendStructure;
     }
 
     private static void createAgents(AgentContainer container, String ez, StringBuilder e) throws StaleProxyException, InterruptedException {
@@ -94,19 +100,14 @@ public class AgentThread extends Thread {
         budgetChecker.start();
         globalEvaluator.start();
         TimeUnit.SECONDS.sleep(1);
-        String singleString = e.toString();                // Te linijki będą do wywalenia jak zajdą zmiany we frontendzie
-        Pattern p = Pattern.compile("(\\d+(?:\\.\\d+))");  //
-        Matcher m = p.matcher(singleString);               //
-        double d = 0;                                      //
-        while (m.find()) {                                  //
-            d = Double.parseDouble(m.group(1));            //
-        }                                                  //
+      
         String str = e.toString();
         Pattern pattern = Pattern.compile("\"result\":(.*?),", Pattern.DOTALL);
         Pattern pattern2 = Pattern.compile("\"costResult\":(.*?),", Pattern.DOTALL);
         Pattern pattern3 = Pattern.compile("\"ageStructResult\":(.*?),", Pattern.DOTALL);
         Pattern pattern4 = Pattern.compile("\"usabilityResult\":(.*?),", Pattern.DOTALL);
         Pattern pattern5 = Pattern.compile("\"budgetResult\":(.*?)}", Pattern.DOTALL);
+
         Matcher matcher = pattern.matcher(str);
         Matcher matcher2 = pattern2.matcher(str);
         Matcher matcher3 = pattern3.matcher(str);
@@ -128,7 +129,6 @@ public class AgentThread extends Thread {
             frontendStructure[4] = Double.parseDouble(matcher5.group(1));
         }
         System.out.println("Customer output: " + frontendStructure[0] + ", " + frontendStructure[1] + ", " + frontendStructure[2] + ", " + frontendStructure[3] + ", " + frontendStructure[4]);
-        //evaluationd = frontendStructure
         evaluation = d;
         listener.onEvent();
         customer.kill();
