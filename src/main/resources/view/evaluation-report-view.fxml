@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="601.0" prefWidth="800.0" stylesheets="@../cssStyle/evaluationReportViewStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dobreagenty.aasd_javafx_demo.ApplicationController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="800.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Raport z ewaluacji pomysłu" textAlignment="CENTER" wrappingWidth="317.44140625">
+               <font>
+                  <Font size="24.0" />
+               </font></Text>
+            <Pane prefHeight="10.0" prefWidth="200.0" />
+            <VBox alignment="CENTER">
+               <children>
+                  <Text fill="#ff1616" strokeType="OUTSIDE" strokeWidth="0.0" text="OCENA OGÓLNA" textAlignment="CENTER" wrappingWidth="317.44140625">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Pane prefHeight="10.0" prefWidth="800.0" />
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="globalEvaluationText" text=" Ocena: 1,000">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="10.0" prefWidth="30.0" />
+                        <ImageView fx:id="globalEvaluationCircleNr1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="globalEvaluationCircleNr2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="globalEvaluationCircleNr3" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="globalEvaluationCircleNr4" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="globalEvaluationCircleNr5" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Pane prefHeight="20.0" prefWidth="800.0" />
+            <Text fill="#004aad" strokeType="OUTSIDE" strokeWidth="0.0" text="OCENY SKŁADOWE" textAlignment="CENTER" wrappingWidth="317.44140625">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Pane prefHeight="20.0" prefWidth="800.0" />
+            <VBox alignment="CENTER">
+               <children>
+                  <Text fill="#004aad" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena ze względu na koszt inwestycji" textAlignment="CENTER" wrappingWidth="317.44140625">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="costEvaluationText" text=" Ocena: 1,000">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="10.0" prefWidth="50.0" />
+                        <ImageView fx:id="costEvaluationCircleNr1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="costEvaluationCircleNr2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="costEvaluationCircleNr3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="costEvaluationCircleNr4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="costEvaluationCircleNr5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="9.0" prefWidth="800.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <Text fill="#004aad" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena ze względu na analizę demograficzną dzielnicy" textAlignment="CENTER" wrappingWidth="404.44140625">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="ageEvaluationText" text=" Ocena: 1,000">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="10.0" prefWidth="50.0" />
+                        <ImageView fx:id="ageEvaluationCircleNr1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ageEvaluationCircleNr2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ageEvaluationCircleNr3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ageEvaluationCircleNr4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="ageEvaluationCircleNr5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="9.0" prefWidth="800.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER">
+               <children>
+                  <Text fill="#004aad" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena ze względu na potencjalną użyteczność inwestycji" textAlignment="CENTER" wrappingWidth="395.44140625">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="usabilityEvaluationText" text=" Ocena: 1,000">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="10.0" prefWidth="50.0" />
+                        <ImageView fx:id="usabilityEvaluationCircleNr1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="usabilityEvaluationCircleNr2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="usabilityEvaluationCircleNr3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="usabilityEvaluationCircleNr4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="usabilityEvaluationCircleNr5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/grey-circle.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Pane prefHeight="9.0" prefWidth="800.0" />
+               </children>
+            </VBox>
+            <Pane prefHeight="20.0" prefWidth="800.0" />
+            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="25.0" prefWidth="138.0" text="Wróć do menu" textAlignment="CENTER" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
