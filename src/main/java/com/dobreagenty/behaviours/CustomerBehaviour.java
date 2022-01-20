@@ -21,9 +21,6 @@ public class CustomerBehaviour extends OneShotBehaviour {
     static Object arg=null;
     static JSONObject[] PreprocessedData= new JSONObject[2];
 
-
-
-
     @Override
     public void action() {
 
@@ -81,15 +78,10 @@ public class CustomerBehaviour extends OneShotBehaviour {
     }
 
     public static JSONObject[] handleApplicationMessageTest() {
-
         return PreprocessedData;
-
     }
 
     public static Object actionTest() {
-
-
         return arg;
-
     }
 }
