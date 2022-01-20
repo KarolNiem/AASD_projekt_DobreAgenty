@@ -276,7 +276,7 @@ public class ApplicationController implements EvaluationListener {
     }
 
     public void handleEvaluationText(ActionEvent event) {
-        eval = AgentThread.getEvaluationValue();
+        eval = AgentThread.getFrontendStructureValue();
         DecimalFormat df = new DecimalFormat("#.###");
         if (globalEvaluationText != null && eval[0] != 0) {
             globalEvaluationText.setText("Ocena ogólna: " + df.format(eval[0]));

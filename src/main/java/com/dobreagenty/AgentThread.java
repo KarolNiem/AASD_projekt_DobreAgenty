@@ -129,7 +129,6 @@ public class AgentThread extends Thread {
             frontendStructure[4] = Double.parseDouble(matcher5.group(1));
         }
         System.out.println("Customer output: " + frontendStructure[0] + ", " + frontendStructure[1] + ", " + frontendStructure[2] + ", " + frontendStructure[3] + ", " + frontendStructure[4]);
-        evaluation = d;
         listener.onEvent();
         customer.kill();
     }
