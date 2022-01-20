@@ -64,6 +64,9 @@ public class ApplicationController implements EvaluationListener {
     private ImageView globalEvaluationCircleNr5;
 
     @FXML
+    private Label costEvaluationText;
+
+    @FXML
     private ImageView costEvaluationCircleNr1;
     @FXML
     private ImageView costEvaluationCircleNr2;
@@ -73,6 +76,9 @@ public class ApplicationController implements EvaluationListener {
     private ImageView costEvaluationCircleNr4;
     @FXML
     private ImageView costEvaluationCircleNr5;
+
+    @FXML
+    private Label ageEvaluationText;
 
     @FXML
     private ImageView ageEvaluationCircleNr1;
@@ -86,6 +92,9 @@ public class ApplicationController implements EvaluationListener {
     private ImageView ageEvaluationCircleNr5;
 
     @FXML
+    private Label usabilityEvaluationText;
+
+    @FXML
     private ImageView usabilityEvaluationCircleNr1;
     @FXML
     private ImageView usabilityEvaluationCircleNr2;
@@ -97,23 +106,24 @@ public class ApplicationController implements EvaluationListener {
     private ImageView usabilityEvaluationCircleNr5;
 
     @FXML
-    private Image greyCircleImage = new Image(getClass().getResourceAsStream("/image/grey-circle.png"),
+    private final Image greyCircleImage = new Image(getClass().getResourceAsStream("/image/grey-circle.png"),
             50, 50, false, false);
     @FXML
-    private Image redCircleImage = new Image(getClass().getResourceAsStream("/image/red-circle.png"),
+    private final Image redCircleImage = new Image(getClass().getResourceAsStream("/image/red-circle.png"),
             50, 50, false, false);
     @FXML
-    private Image blueCircleImage = new Image(getClass().getResourceAsStream("/image/blue-circle.png"),
+    private final Image blueCircleImage = new Image(getClass().getResourceAsStream("/image/blue-circle.png"),
             50, 50, false, false);
     @FXML
-    private Image redHalfCircleImage = new Image(getClass().getResourceAsStream("/image/red-half-circle.png"),
+    private final Image redHalfCircleImage = new Image(getClass().getResourceAsStream("/image/red-half-circle.png"),
             50, 50, false, false);
     @FXML
-    private Image blueHalfCircleImage = new Image(getClass().getResourceAsStream("/image/blue-half-circle.png"),
+    private final Image blueHalfCircleImage = new Image(getClass().getResourceAsStream("/image/blue-half-circle.png"),
             50, 50, false, false);
 
     private static JSONObject ideaData;
     private static JSONObject customerData;
+    private static double[] eval;
 
     @Override
     public void onEvent() {
@@ -236,15 +246,29 @@ public class ApplicationController implements EvaluationListener {
         stage.show();
     }
 
-    public void switchToEvaluationRaportView() throws IOException {
-
+    public void switchToEvaluationReportView() throws IOException {
+        fxmlLoader = new FXMLLoader(ApplicationMain.class.getResource("/view/evaluation-report-view.fxml"));
+        root = fxmlLoader.load();
+        scene = new Scene(root);
+        ApplicationController controller = fxmlLoader.getController();
+        controller.colorGlobalEvaluationCircles(eval[0]);
+        controller.writeGlobalEvaluationText();
+        controller.colorCostEvaluationCircles(eval[1]);
+        controller.writeCostEvaluationText();
+        controller.colorAgeEvaluationCircles(eval[2]);
+        controller.writeAgelEvaluationText();
+        controller.colorUsabilityEvaluationCircles(eval[3]);
+        controller.writeUsabilityEvaluationText();
+        stage = ApplicationMain.getMainStage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void handleEvaluationText(ActionEvent event) {
-        double[] eval = AgentThread.getEvaluationValue();
+        eval = AgentThread.getEvaluationValue();
         DecimalFormat df = new DecimalFormat("#.###");
         if (globalEvaluationText != null && eval[0] != 0) {
-            globalEvaluationText.setText("Ocena ogólna: " + String.valueOf(df.format(eval[0])));
+            globalEvaluationText.setText("Ocena ogólna: " + df.format(eval[0]));
         }
         colorGlobalEvaluationCircles(eval[0]);
     }
@@ -260,7 +284,7 @@ public class ApplicationController implements EvaluationListener {
         if (evaluation >= 0.6) coloredCircles[3] = .5;
         if (evaluation >= 0.7) coloredCircles[3] = 1;
         if (evaluation >= 0.8) coloredCircles[4] = .5;
-        if (evaluation >= 0.9) coloredCircles[5] = 1;
+        if (evaluation >= 0.9) coloredCircles[4] = 1;
         return coloredCircles;
     }
 
@@ -342,7 +366,7 @@ public class ApplicationController implements EvaluationListener {
             costEvaluationCircleNr5.setImage(blueCircleImage);
     }
 
-    private void ageCostEvaluationCircles(double evaluation){
+    private void colorAgeEvaluationCircles(double evaluation){
         double[] coloredCircles = setColoredCircles(evaluation);
 
         if (coloredCircles[0] == 0)
@@ -381,7 +405,7 @@ public class ApplicationController implements EvaluationListener {
             ageEvaluationCircleNr5.setImage(blueCircleImage);
     }
 
-    private void usabilityCostEvaluationCircles(double evaluation){
+    private void colorUsabilityEvaluationCircles(double evaluation){
         double[] coloredCircles = setColoredCircles(evaluation);
 
         if (coloredCircles[0] == 0)
@@ -420,4 +444,31 @@ public class ApplicationController implements EvaluationListener {
             usabilityEvaluationCircleNr5.setImage(blueCircleImage);
     }
 
+    public void writeGlobalEvaluationText() {
+        DecimalFormat df = new DecimalFormat("#.###");
+        if (globalEvaluationText != null && eval[0] != 0) {
+            globalEvaluationText.setText("Ocena: " + df.format(eval[0]));
+        }
+    }
+
+    public void writeCostEvaluationText() {
+        DecimalFormat df = new DecimalFormat("#.###");
+        if (costEvaluationText != null && eval[1] != 0) {
+            costEvaluationText.setText("Ocena: " + df.format(eval[1]));
+        }
+    }
+
+    public void writeAgelEvaluationText() {
+        DecimalFormat df = new DecimalFormat("#.###");
+        if (ageEvaluationText != null && eval[2] != 0) {
+            ageEvaluationText.setText("Ocena: " + df.format(eval[2]));
+        }
+    }
+
+    public void writeUsabilityEvaluationText() {
+        DecimalFormat df = new DecimalFormat("#.###");
+        if (usabilityEvaluationText != null && eval[3] != 0) {
+            usabilityEvaluationText.setText("Ocena: " + df.format(eval[3]));
+        }
+    }
 }

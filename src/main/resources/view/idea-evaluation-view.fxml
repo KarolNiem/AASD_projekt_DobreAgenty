@@ -48,7 +48,7 @@
             </HBox>
             <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#handleEvaluationText" prefHeight="25.0" prefWidth="138.0" text="Pokaż ocenę" textAlignment="CENTER" />
             <Pane prefHeight="10.0" prefWidth="200.0" />
-            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToEvaluationRaportView" prefHeight="25.0" prefWidth="138.0" text="Pokaż raport" textAlignment="CENTER" />
+            <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToEvaluationReportView" prefHeight="25.0" prefWidth="138.0" text="Pokaż raport" textAlignment="CENTER" />
             <Pane prefHeight="10.0" prefWidth="200.0" />
             <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="25.0" prefWidth="138.0" text="Wróć do menu" textAlignment="CENTER" />
          </children>
