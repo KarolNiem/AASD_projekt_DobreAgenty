@@ -6,6 +6,7 @@ public enum DistrictEnum {
     Wola,
     Zoliborz,
     PragaPln,
+    TestDistrict,
     Average;
 
     @Override
@@ -16,6 +17,7 @@ public enum DistrictEnum {
             case Wola -> "Wola";
             case Zoliborz -> "Żoliborz";
             case PragaPln -> "Praga Północ";
+            case TestDistrict -> "TestDistrict";
             case Average -> "";
         };
     }

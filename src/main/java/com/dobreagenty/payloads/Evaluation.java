@@ -8,6 +8,7 @@ public class Evaluation {
     public double costResult;
     public double ageStructResult;
     public double usabilityResult;
+    public double budgetResult;
 
     public Evaluation(EvaluationSummary summary) {
         offer = summary.offer;
@@ -15,6 +16,7 @@ public class Evaluation {
         costResult=summary.costEvaluation;
         ageStructResult=summary.ageStructEvaluation;
         usabilityResult=summary.usabilityEvaluation;
+        budgetResult=summary.budgetEvaluation;
     }
 
     public Evaluation(JSONObject json) {
@@ -23,6 +25,7 @@ public class Evaluation {
         costResult = json.getDouble("costResult");
         ageStructResult=json.getDouble("ageStructResult");
         usabilityResult=json.getDouble("usabilityResult");
+        budgetResult=json.getInt("budgetEvaluation");
     }
 
     public double evaluate(EvaluationSummary summary) {
@@ -44,6 +47,7 @@ public class Evaluation {
         json.put("costResult",costResult);
         json.put("ageStructResult",ageStructResult);
         json.put("usabilityResult",usabilityResult);
+        json.put("budgetResult",budgetResult);
         return json.toString();
     }
 }

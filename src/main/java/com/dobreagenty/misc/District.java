@@ -43,6 +43,9 @@ public class District {
             case BusStop -> getNumberOfBusStops(district);
             case TrashCan -> getNumberOfTrashCans(district);
             case Library -> getNumberOfLibraries(district);
+            case TestObject -> getNumberOfTestObjects(district);
+            case TestObject2 -> getNumberOfTestObjects2(district);
+            case TestObject3 -> getNumberOfTestObjects3(district);
         };
     }
 
@@ -53,6 +56,7 @@ public class District {
             case Wola -> 40000000;
             case Zoliborz -> 15000000;
             case PragaPln -> 15000000;
+            case TestDistrict -> 40000000;
             case Average -> 24400000;
         };
     }
@@ -68,6 +72,7 @@ public class District {
             case Wola -> 20298;
             case Zoliborz -> 8177;
             case PragaPln -> 8484;
+            case TestDistrict -> 10000;
             case Average -> 16257;
         };
     }
@@ -79,6 +84,7 @@ public class District {
             case Wola -> 90709;
             case Zoliborz -> 32837;
             case PragaPln -> 42243;
+            case TestDistrict -> 0;
             case Average -> 74223;
         };
     }
@@ -90,6 +96,7 @@ public class District {
             case Wola -> 30400;
             case Zoliborz -> 11778;
             case PragaPln -> 12754;
+            case TestDistrict -> 10000;
             case Average -> 27450;
         };
     }
@@ -101,6 +108,7 @@ public class District {
             case Wola -> 19;
             case Zoliborz -> 19;
             case PragaPln -> 15;
+            case TestDistrict -> 0;
             case Average -> 18;
         };
     }
@@ -112,6 +120,7 @@ public class District {
             case Wola -> 22;
             case Zoliborz -> 6;
             case PragaPln -> 8;
+            case TestDistrict -> 0;
             case Average -> 20;
         };
     }
@@ -123,13 +132,14 @@ public class District {
             case Wola -> 66;
             case Zoliborz -> 28;
             case PragaPln -> 19;
+            case TestDistrict -> 0;
             case Average -> 55;
         };
     }
 
     public int getNumberOfBrineGraduationTowers(DistrictEnum district) {
         return switch (district) {
-            case Srodmiescie, Mokotow, Zoliborz -> 0;
+            case Srodmiescie, Mokotow, Zoliborz, TestDistrict -> 0;
             case Wola, PragaPln, Average -> 1;
         };
     }
@@ -141,6 +151,7 @@ public class District {
             case Wola -> 20;
             case Zoliborz -> 18;
             case PragaPln -> 18;
+            case TestDistrict -> 0;
             case Average -> 20;
         };
     }
@@ -152,6 +163,7 @@ public class District {
             case Wola -> 249;
             case Zoliborz -> 176;
             case PragaPln -> 153;
+            case TestDistrict -> 0;
             case Average -> 185;
         };
     }
@@ -163,6 +175,7 @@ public class District {
             case Wola -> 827;
             case Zoliborz -> 386;
             case PragaPln -> 680;
+            case TestDistrict -> 0;
             case Average -> 1053;
         };
     }
@@ -174,7 +187,41 @@ public class District {
             case Wola -> 9;
             case Zoliborz -> 9;
             case PragaPln -> 8;
+            case TestDistrict -> 0;
             case Average -> 11;
+        };
+    }
+    public int getNumberOfTestObjects(DistrictEnum district) {
+        return switch (district) {
+            case Srodmiescie -> 1;
+            case Mokotow -> 1;
+            case Wola -> 1;
+            case Zoliborz -> 1;
+            case PragaPln -> 1;
+            case TestDistrict -> 1;
+            case Average -> 1;
+        };
+    }
+    public int getNumberOfTestObjects2(DistrictEnum district) {
+        return switch (district) {
+            case Srodmiescie -> 1;
+            case Mokotow -> 1;
+            case Wola -> 1;
+            case Zoliborz -> 1;
+            case PragaPln -> 1;
+            case TestDistrict -> 0;
+            case Average -> 1;
+        };
+    }
+    public int getNumberOfTestObjects3(DistrictEnum district) {
+        return switch (district) {
+            case Srodmiescie -> 4;
+            case Mokotow -> 6;
+            case Wola -> 2;
+            case Zoliborz -> 5;
+            case PragaPln -> 3;
+            case TestDistrict -> 4;
+            case Average -> 4;
         };
     }
 }

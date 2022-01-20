@@ -21,14 +21,17 @@ public class OfferType {
             case BusStop -> 250000;
             case TrashCan -> 10000;
             case Library -> 5000000;
+            case TestObject -> 40000001;
+            case TestObject2 -> 0;
+            case TestObject3 -> 40000001;
         };
     }
 
     public TargetGroup GetTargetGroup(OfferTypeEnum type) {
         return switch (type) {
-            case School, Preschool, Playground -> TargetGroup.Children;
-            case BrineGraduationTower, Library -> TargetGroup.Seniors;
-            case ParkingLot, BusStop, TrashCan -> TargetGroup.Adults;
+            case School, Preschool, Playground, TestObject3 -> TargetGroup.Children;
+            case BrineGraduationTower, Library, TestObject2 -> TargetGroup.Seniors;
+            case ParkingLot, BusStop, TrashCan, TestObject -> TargetGroup.Adults;
         };
     }
 }

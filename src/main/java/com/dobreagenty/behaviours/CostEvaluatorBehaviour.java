@@ -7,21 +7,11 @@ import org.json.JSONObject;
 
 public class CostEvaluatorBehaviour extends EvaluatorBehaviour {
     @Override
-    public void action() {
-        ACLMessage msg = myAgent.receive();
-        if (msg != null) {
-            try {
-                String content = msg.getContent();
-                System.out.println("CostEvaluator received: " + content);
-                JSONObject json = new JSONObject(content);
-                Offer offer = new Offer(json);
-                CostEvaluation evaluation = new CostEvaluation(offer);
-                reply(msg, evaluation);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            block();
-        }
+    public CostEvaluation evaluate(ACLMessage msg) {
+        String content = msg.getContent();
+        System.out.println("CostEvaluator received: " + content);
+        JSONObject json = new JSONObject(content);
+        Offer offer = new Offer(json);
+        return new CostEvaluation(offer);
     }
 }

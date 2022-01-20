@@ -8,7 +8,10 @@ public enum OfferTypeEnum {
     ParkingLot,
     BusStop,
     TrashCan,
-    Library;
+    Library,
+    TestObject,
+    TestObject2,
+    TestObject3;
 
     @Override
     public String toString() {
@@ -20,6 +23,9 @@ public enum OfferTypeEnum {
             case ParkingLot -> "Parking";
             case BusStop -> "Przystanek autobusowy";
             case TrashCan -> "Śmietnik";
+            case TestObject -> "Obiekt testowy";
+            case TestObject2 -> "Obiekt testowy 2";
+            case TestObject3 -> "Obiekt testowy 3";
             case Library -> "Biblioteka";
         };
     }
